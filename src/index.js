@@ -15,6 +15,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.polls = new Collection();
 
 /** Hàm đệ quy quét file .js trong thư mục */
 const walk = (dir) =>
@@ -65,5 +66,5 @@ app.get("/", (req, res) => res.send("✅ DinoBot is running on Render!"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
-  console.log(`🌐 Keep-alive web server listening on port ${PORT}`)
+  console.log(`🌐 Keep-alive web server listening on port ${PORT}`),
 );

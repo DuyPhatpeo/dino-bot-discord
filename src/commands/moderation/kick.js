@@ -9,17 +9,28 @@ module.exports = {
       option
         .setName("target")
         .setDescription("Thành viên cần kick")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
-      option.setName("reason").setDescription("Lý do kick").setRequired(false)
+      option.setName("reason").setDescription("Lý do kick").setRequired(false),
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
   async execute(interaction) {
     const target = interaction.options.getUser("target");
     const reason = interaction.options.getString("reason") || "Không có lý do";
-    const member = interaction.guild.members.cache.get(target.id);
+
+    // Fetch member để tránh lỗi nếu không có trong cache
+    const member = await interaction.guild.members
+      .fetch(target.id)
+      .catch(() => null);
+
+    if (!member) {
+      return interaction.reply({
+        content: "❌ Không tìm thấy thành viên này trong server!",
+        ephemeral: true,
+      });
+    }
 
     if (!member.kickable) {
       return interaction.reply({
@@ -34,7 +45,7 @@ module.exports = {
       .setColor(0xffa500)
       .setTitle("👢 Thành viên đã bị KICK")
       .setDescription(
-        `**Người bị kick:** ${target}\n**Lý do:** ${reason}\n**Người thực hiện:** ${interaction.user}`
+        `**Người bị kick:** ${target}\n**Lý do:** ${reason}\n**Người thực hiện:** ${interaction.user}`,
       )
       .setTimestamp();
 
