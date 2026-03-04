@@ -17,25 +17,25 @@ module.exports = {
 
     if (!target) {
       return interaction.reply({
-        content: "❌ Không tìm thấy thành viên này trong server.",
+        content: "Không tìm thấy thành viên này trong server.",
         ephemeral: true,
       });
     }
 
     if (!target.isCommunicationDisabled()) {
       return interaction.reply({
-        content: "⚠️ Thành viên này hiện không bị mute.",
+        content: "Thành viên này hiện không bị mute.",
         ephemeral: true,
       });
     }
 
     try {
       await target.timeout(null); // gỡ timeout
-      await interaction.reply(`✅ ${target.user.tag} đã được gỡ mute.`);
+      await interaction.reply(`${target.user.tag} đã được gỡ mute.`);
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: "❌ Không thể gỡ mute. Kiểm tra quyền của bot.",
+        content: "Không thể gỡ mute. Kiểm tra quyền của bot.",
         ephemeral: true,
       });
     }

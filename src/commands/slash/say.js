@@ -16,9 +16,13 @@ module.exports = {
 
     // Tạo embed để trả về
     const embed = new EmbedBuilder()
-      .setColor(0x2ec99d)
-      .setTitle("📢 Say Command")
-      .setDescription(`${message} <@${interaction.user.id}>`);
+      .setColor("#2b2d31")
+      .setAuthor({
+        name: `${interaction.user.username} nói rằng:`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
+      .setDescription(`>>> ${message}`)
+      .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });
   },

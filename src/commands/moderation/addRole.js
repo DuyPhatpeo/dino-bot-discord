@@ -60,10 +60,12 @@ module.exports = {
       await target.roles.add(role);
 
       const embed = new EmbedBuilder()
-        .setColor(0x00ff00)
-        .setTitle("✅ Role đã được cấp")
-        .setDescription(
-          `**Thành viên:** ${target}\n**Role:** ${role}\n**Người thực hiện:** ${interaction.user}`
+        .setColor("#57f287") // Màu xanh lá Success
+        .setAuthor({ name: "Cấp Vai Trò Thành Công" })
+        .addFields(
+          { name: "Thành viên", value: `${target}`, inline: true },
+          { name: "Vai trò", value: `${role}`, inline: true },
+          { name: "Quản trị viên", value: `${interaction.user}`, inline: true }
         )
         .setTimestamp();
 

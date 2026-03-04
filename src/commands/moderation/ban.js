@@ -34,7 +34,7 @@ module.exports = {
 
     if (!member.bannable) {
       return interaction.reply({
-        content: "❌ Không thể ban thành viên này!",
+        content: "❌ Không thể ban thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
         ephemeral: true,
       });
     }
@@ -42,11 +42,20 @@ module.exports = {
     await member.ban({ reason });
 
     const embed = new EmbedBuilder()
-      .setColor(0xff0000)
-      .setTitle("🚫 Thành viên đã bị BAN")
-      .setDescription(
-        `**Người bị ban:** ${target}\n**Lý do:** ${reason}\n**Người thực hiện:** ${interaction.user}`,
+      .setColor("#ed4245") // Màu đỏ của Discord (Danger)
+      .setAuthor({
+        name: `Lệnh Phạt Ban Đã Được Thực Thi`
+      })
+      .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
+      .addFields(
+        { name: "Người bị cấm", value: `${target} (\`${target.id}\`)`, inline: true },
+        { name: "Quản trị viên", value: `${interaction.user}`, inline: true },
+        { name: "Lý do", value: `> ${reason}`, inline: false }
       )
+      .setFooter({
+        text: `Ban bởi ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });

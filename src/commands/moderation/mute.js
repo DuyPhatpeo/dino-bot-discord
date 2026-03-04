@@ -36,11 +36,21 @@ module.exports = {
     await member.timeout(duration, reason);
 
     const embed = new EmbedBuilder()
-      .setColor(0x3498db)
-      .setTitle("🔇 Thành viên đã bị MUTE")
-      .setDescription(
-        `**Người bị mute:** ${target}\n**Thời gian:** ${minutes} phút\n**Lý do:** ${reason}\n**Người thực hiện:** ${interaction.user}`
+      .setColor("#3498db") // Xanh lam
+      .setAuthor({
+        name: `Lệnh Phạt Mute Đã Được Thực Thi`
+      })
+      .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
+      .addFields(
+        { name: "Người bị tắt tiếng", value: `${target} (\`${target.id}\`)`, inline: true },
+        { name: "Thời gian", value: `${minutes} phút`, inline: true },
+        { name: "Quản trị viên", value: `${interaction.user}`, inline: true },
+        { name: "Lý do", value: `> ${reason}`, inline: false }
       )
+      .setFooter({
+        text: `Mute bởi ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });

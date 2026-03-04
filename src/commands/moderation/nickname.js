@@ -36,10 +36,12 @@ module.exports = {
       await member.setNickname(newNickname);
 
       const embed = new EmbedBuilder()
-        .setColor(0x00ff00)
-        .setTitle("✅ Đổi biệt hiệu thành công")
-        .setDescription(
-          `**Thành viên:** ${target}\n**Biệt hiệu mới:** ${newNickname}\n**Người thực hiện:** ${interaction.user}`
+        .setColor("#57f287") // Màu xanh lá Success
+        .setAuthor({ name: "Đổi Biệt Hiệu Thành Công" })
+        .addFields(
+          { name: "Thành viên", value: `${target}`, inline: true },
+          { name: "Biệt hiệu mới", value: `\`${newNickname}\``, inline: true },
+          { name: "Người đổi", value: `${interaction.user}`, inline: true }
         )
         .setTimestamp();
 

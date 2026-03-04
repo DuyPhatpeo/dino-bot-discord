@@ -17,7 +17,7 @@ module.exports = {
 
     if (amount < 1 || amount > 100) {
       return interaction.reply({
-        content: "⚠️ Vui lòng nhập số từ **1 đến 100**.",
+        content: "Vui lòng nhập số từ **1 đến 100**.",
         ephemeral: true,
       });
     }
@@ -25,14 +25,14 @@ module.exports = {
     try {
       await interaction.channel.bulkDelete(amount, true); // true = bỏ qua tin nhắn quá 14 ngày
       await interaction.reply({
-        content: `✅ Đã xóa **${amount}** tin nhắn.`,
+        content: `Đã xóa **${amount}** tin nhắn.`,
         ephemeral: true,
       });
     } catch (error) {
       console.error(error);
       await interaction.reply({
         content:
-          "❌ Không thể xóa tin nhắn. Hãy chắc chắn bot có quyền và tin nhắn không quá 14 ngày.",
+          "Không thể xóa tin nhắn. Hãy chắc chắn bot có quyền và tin nhắn không quá 14 ngày.",
         ephemeral: true,
       });
     }

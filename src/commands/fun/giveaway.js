@@ -28,10 +28,10 @@ module.exports = {
     const duration = interaction.options.getInteger("duration");
 
     const embed = new EmbedBuilder()
-      .setColor(0xff69b4)
-      .setTitle("🎉 Giveaway 🎉")
+      .setColor("#9b59b6") // Xanh tím mộng mơ
+      .setTitle("Giveaway!")
       .setDescription(
-        `**Phần thưởng:** ${prize}\n⏳ Kết thúc sau: **${duration} giây**\n\nBấm nút bên dưới để tham gia hoặc xem danh sách!`
+        `**Phần thưởng:** ${prize}\n⌛ Kết thúc sau: **${duration} giây**\n\nBấm nút bên dưới để tham gia!`
       )
       .setFooter({ text: `Tạo bởi ${interaction.user.tag}` })
       .setTimestamp();
@@ -39,11 +39,11 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("giveaway_join")
-        .setLabel("🎉 Tham gia")
-        .setStyle(ButtonStyle.Success),
+        .setLabel("Tham gia")
+        .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
         .setCustomId("giveaway_list")
-        .setLabel("👥 Xem danh sách")
+        .setLabel("Danh sách")
         .setStyle(ButtonStyle.Secondary)
     );
 
@@ -55,8 +55,6 @@ module.exports = {
 
     // Lưu danh sách người tham gia
     const participants = new Set();
-
-    // Collector cho nút
     const collector = message.createMessageComponentCollector({
       time: duration * 1000,
     });
@@ -65,7 +63,7 @@ module.exports = {
       if (btnInteraction.customId === "giveaway_join") {
         participants.add(btnInteraction.user.id);
         await btnInteraction.reply({
-          content: `🎉 Bạn đã tham gia giveaway!`,
+          content: `Bạn đã tham gia giveaway!`,
           ephemeral: true,
         });
       }
@@ -74,12 +72,12 @@ module.exports = {
         const list =
           participants.size > 0
             ? Array.from(participants)
-                .map((id) => `<@${id}>`)
-                .join(", ")
+              .map((id) => `<@${id}>`)
+              .join(", ")
             : "Chưa có ai tham gia.";
 
         await btnInteraction.reply({
-          content: `👥 **Danh sách người tham gia:**\n${list}`,
+          content: `**Danh sách người tham gia:**\n${list}`,
           ephemeral: true,
         });
       }
@@ -94,8 +92,8 @@ module.exports = {
       }
 
       const resultEmbed = new EmbedBuilder()
-        .setColor(0x00ff00)
-        .setTitle("🎁 Giveaway Kết Thúc 🎁")
+        .setColor("#2b2d31")
+        .setTitle("Giveaway Kết Thúc")
         .setDescription(
           winner
             ? `Chúc mừng ${winner} đã thắng **${prize}**!`

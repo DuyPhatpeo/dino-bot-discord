@@ -41,7 +41,7 @@ module.exports = {
       // Gửi DM cho user bị cảnh báo
       await target
         .send(
-          `⚠️ Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
+          `Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
         )
         .catch(() => {
           console.log("Không thể gửi DM cho user này.");
@@ -49,12 +49,12 @@ module.exports = {
 
       // Thông báo trong kênh
       await interaction.reply(
-        `✅ ${target} đã bị cảnh báo.\n**Lý do:** ${reason}`
+        `${target} đã bị cảnh báo.\n**Lý do:** ${reason}`
       );
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: "❌ Có lỗi xảy ra khi cảnh báo user.",
+        content: "Có lỗi xảy ra khi cảnh báo user.",
         ephemeral: true,
       });
     }

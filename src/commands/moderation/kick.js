@@ -34,7 +34,7 @@ module.exports = {
 
     if (!member.kickable) {
       return interaction.reply({
-        content: "❌ Không thể kick thành viên này!",
+        content: "❌ Không thể kick thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
         ephemeral: true,
       });
     }
@@ -42,11 +42,20 @@ module.exports = {
     await member.kick(reason);
 
     const embed = new EmbedBuilder()
-      .setColor(0xffa500)
-      .setTitle("👢 Thành viên đã bị KICK")
-      .setDescription(
-        `**Người bị kick:** ${target}\n**Lý do:** ${reason}\n**Người thực hiện:** ${interaction.user}`,
+      .setColor("#fee75c") // Màu vàng của Discord
+      .setAuthor({
+        name: `Lệnh Phạt Kick Đã Được Thực Thi`
+      })
+      .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
+      .addFields(
+        { name: "Người bị đuổi", value: `${target} (\`${target.id}\`)`, inline: true },
+        { name: "Quản trị viên", value: `${interaction.user}`, inline: true },
+        { name: "Lý do", value: `> ${reason}`, inline: false }
       )
+      .setFooter({
+        text: `Kick bởi ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });
