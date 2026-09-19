@@ -1,3 +1,5 @@
+const { MessageFlags } = require("discord.js");
+
 module.exports.handleCommand = async (interaction) => {
   const command = interaction.client.commands.get(interaction.commandName);
   if (!command) {
@@ -7,15 +9,20 @@ module.exports.handleCommand = async (interaction) => {
   try {
     await command.execute(interaction);
   } catch (err) {
-    console.error(err);
-    const replyMsg = {
-      content: "⚠️ Có lỗi xảy ra khi chạy lệnh.",
-      ephemeral: true,
-    };
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp(replyMsg);
-    } else {
-      await interaction.reply(replyMsg);
+    console.error(`❌ Lỗi khi thực thi lệnh /${interaction.commandName}:`, err);
+    try {
+      const replyMsg = {
+        content: "⚠️ Có lỗi xảy ra khi chạy lệnh.",
+        flags: MessageFlags.Ephemeral,
+      };
+      if (interaction.replied || interaction.deferred) {
+        await interaction.followUp(replyMsg);
+      } else {
+        await interaction.reply(replyMsg);
+      }
+    } catch (replyErr) {
+      // Ignore secondary error if interaction is already acknowledged by another instance
     }
   }
 };
+

@@ -57,6 +57,19 @@ if (fs.existsSync(eventsPath)) {
   }
 }
 
+/** Global Error Handlers */
+client.on("error", (error) => {
+  console.error("❌ Discord Client Error:", error);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("⚠️ Unhandled Rejection:", reason);
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("⚠️ Uncaught Exception:", error);
+});
+
 /** Login bot Discord */
 client.login(process.env.DISCORD_TOKEN);
 
@@ -68,3 +81,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`🌐 Keep-alive web server listening on port ${PORT}`),
 );
+
