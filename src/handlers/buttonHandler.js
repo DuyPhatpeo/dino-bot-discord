@@ -70,7 +70,7 @@ module.exports.handleButton = async (interaction) => {
       () => Math.floor(Math.random() * sides) + 1
     );
 
-    const { createDiceEmbed } = require("../commands/fun/doxucxac");
+    const { createDiceEmbed } = require("../commands/fun/roll");
     const embed = createDiceEmbed(interaction.user, count, sides, rolls);
 
     return interaction.update({

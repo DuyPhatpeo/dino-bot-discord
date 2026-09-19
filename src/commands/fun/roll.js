@@ -30,7 +30,7 @@ function createDiceEmbed(user, count, sides, rolls) {
   const embed = new EmbedBuilder()
     .setColor("#2ec99d")
     .setAuthor({ name: "MINI GAMES" })
-    .setTitle("Đổ Xúc Xắc")
+    .setTitle("Tung Xúc Xắc")
     .addFields(
       {
         name: "Thông Số",
@@ -53,7 +53,7 @@ function createDiceEmbed(user, count, sides, rolls) {
   }
 
   embed
-    .setFooter({ text: `Người đổ: ${user.tag}` })
+    .setFooter({ text: `Người tung: ${user.tag}` })
     .setTimestamp();
 
   return embed;
@@ -62,11 +62,11 @@ function createDiceEmbed(user, count, sides, rolls) {
 module.exports = {
   createDiceEmbed,
   data: new SlashCommandBuilder()
-    .setName("doxucxac")
-    .setDescription("Đổ xúc xắc ngẫu nhiên (chọn số lượng và số mặt)")
+    .setName("roll")
+    .setDescription("Tung xúc xắc ngẫu nhiên (chọn số lượng và số mặt)")
     .addIntegerOption((option) =>
       option
-        .setName("so_luong")
+        .setName("count")
         .setDescription("Số lượng viên xúc xắc (1 - 6, mặc định 1)")
         .setMinValue(1)
         .setMaxValue(6)
@@ -74,7 +74,7 @@ module.exports = {
     )
     .addIntegerOption((option) =>
       option
-        .setName("so_mat")
+        .setName("sides")
         .setDescription("Số mặt của xúc xắc (2 - 100, mặc định 6)")
         .setMinValue(2)
         .setMaxValue(100)
@@ -82,8 +82,8 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const count = interaction.options.getInteger("so_luong") || 1;
-    const sides = interaction.options.getInteger("so_mat") || 6;
+    const count = interaction.options.getInteger("count") || 1;
+    const sides = interaction.options.getInteger("sides") || 6;
 
     const rolls = Array.from(
       { length: count },
@@ -94,7 +94,7 @@ module.exports = {
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId(`dice_reroll_${count}_${sides}_${interaction.user.id}`)
+        .setCustomId(`dice_reroll_${count}_${sides}`)
         .setEmoji("🎲")
         .setLabel("Đổ lại")
         .setStyle(ButtonStyle.Primary)
