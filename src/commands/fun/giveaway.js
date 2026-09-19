@@ -106,6 +106,21 @@ module.exports = {
         winner = `<@${randomId}>`;
       }
 
+      // Vô hiệu hóa nút trên tin nhắn giveaway gốc
+      const disabledRow = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("giveaway_ended")
+          .setLabel("Đã kết thúc")
+          .setStyle(ButtonStyle.Secondary)
+          .setDisabled(true)
+      );
+
+      try {
+        await message.edit({ components: [disabledRow] });
+      } catch (e) {
+        // Bỏ qua nếu tin nhắn bị xóa
+      }
+
       const resultEmbed = new EmbedBuilder()
         .setColor(winner ? "#57f287" : "#ed4245")
         .setAuthor({ name: "MINI GAMES" })
@@ -125,8 +140,15 @@ module.exports = {
         .setFooter({ text: "Giveaway đã kết thúc" })
         .setTimestamp();
 
-      await message.edit({ embeds: [resultEmbed], components: [] });
+      // Gửi thông báo MỚI vào kênh
+      await interaction.channel.send({
+        content: winner
+          ? `🎉 Chúc mừng ${winner} đã may mắn trúng giải thưởng **${prize}**!`
+          : undefined,
+        embeds: [resultEmbed],
+      });
     });
   },
 };
+
 
