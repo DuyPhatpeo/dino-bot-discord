@@ -18,11 +18,12 @@ module.exports = {
     const roles = guild.roles.cache.size;
 
     const embed = new EmbedBuilder()
-      .setColor("#2b2d31") // Màu chuẩn của Discord tối
+      .setColor("#2ec99d")
       .setAuthor({
-        name: `${guild.name}`,
+        name: "THÔNG TIN MÁY CHỦ",
         iconURL: guild.iconURL({ dynamic: true }),
       })
+      .setTitle(`🏰 ${guild.name}`)
       .setThumbnail(guild.iconURL({ dynamic: true, size: 1024 }))
       .addFields(
         {

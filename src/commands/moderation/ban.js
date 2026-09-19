@@ -42,10 +42,9 @@ module.exports = {
     await member.ban({ reason });
 
     const embed = new EmbedBuilder()
-      .setColor("#ed4245") // Màu đỏ của Discord (Danger)
-      .setAuthor({
-        name: `Lệnh Phạt Ban Đã Được Thực Thi`
-      })
+      .setColor("#ed4245")
+      .setAuthor({ name: "QUẢN TRỊ VIÊN" })
+      .setTitle("🔨 Cấm Thành Viên (Ban)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị cấm", value: `${target} (\`${target.id}\`)`, inline: true },

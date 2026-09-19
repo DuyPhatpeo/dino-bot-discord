@@ -36,8 +36,9 @@ module.exports = {
       await member.setNickname(newNickname);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287") // Màu xanh lá Success
-        .setAuthor({ name: "Đổi Biệt Hiệu Thành Công" })
+        .setColor("#57f287")
+        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
+        .setTitle("✏️ Đổi Biệt Hiệu Thành Viên")
         .addFields(
           { name: "Thành viên", value: `${target}`, inline: true },
           { name: "Biệt hiệu mới", value: `\`${newNickname}\``, inline: true },

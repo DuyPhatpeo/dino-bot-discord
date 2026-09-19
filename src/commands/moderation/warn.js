@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  PermissionFlagsBits,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,7 +20,6 @@ module.exports = {
         .setDescription("Lý do cảnh báo")
         .setRequired(false)
     )
-    // đổi ModerateMembers -> KickMembers (hoặc BanMembers tuỳ quyền mod bạn chọn)
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
   async execute(interaction) {
@@ -41,22 +44,48 @@ module.exports = {
       // Gửi DM cho user bị cảnh báo
       await target
         .send(
-          `Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
+          `⚠️ Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
         )
         .catch(() => {
           console.log("Không thể gửi DM cho user này.");
         });
 
-      // Thông báo trong kênh
-      await interaction.reply(
-        `${target} đã bị cảnh báo.\n**Lý do:** ${reason}`
-      );
+      const embed = new EmbedBuilder()
+        .setColor("#fee75c") // Màu vàng cảnh báo
+        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
+        .setTitle("⚠️ Cảnh Báo Thành Viên")
+        .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
+        .addFields(
+          {
+            name: "Người Bị Cảnh Báo",
+            value: `${target} (\`${target.tag}\`)`,
+            inline: true,
+          },
+          {
+            name: "Quản Trị Viên",
+            value: `${interaction.user}`,
+            inline: true,
+          },
+          {
+            name: "Lý Do",
+            value: `>>> ${reason}`,
+            inline: false,
+          }
+        )
+        .setFooter({
+          text: `Thực hiện bởi ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+        })
+        .setTimestamp();
+
+      await interaction.reply({ embeds: [embed] });
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: "Có lỗi xảy ra khi cảnh báo user.",
+        content: "❌ Có lỗi xảy ra khi cảnh báo user.",
         ephemeral: true,
       });
     }
   },
 };
+

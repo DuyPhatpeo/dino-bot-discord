@@ -28,10 +28,25 @@ module.exports = {
     const duration = interaction.options.getInteger("duration");
 
     const embed = new EmbedBuilder()
-      .setColor("#9b59b6") // Xanh tím mộng mơ
-      .setTitle("Giveaway!")
-      .setDescription(
-        `**Phần thưởng:** ${prize}\n⌛ Kết thúc sau: **${duration} giây**\n\nBấm nút bên dưới để tham gia!`
+      .setColor("#2ec99d")
+      .setAuthor({ name: "MINI GAMES" })
+      .setTitle("🎉 Sự Kiện Giveaway")
+      .addFields(
+        {
+          name: "Phần Thưởng",
+          value: `🎁 **${prize}**`,
+          inline: true,
+        },
+        {
+          name: "Thời Gian",
+          value: `⌛ **${duration} giây**`,
+          inline: true,
+        },
+        {
+          name: "Cách Tham Gia",
+          value: "Bấm nút **Tham gia** bên dưới để có cơ hội nhận quà!",
+          inline: false,
+        }
       )
       .setFooter({ text: `Tạo bởi ${interaction.user.tag}` })
       .setTimestamp();
@@ -40,7 +55,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("giveaway_join")
         .setLabel("Tham gia")
-        .setStyle(ButtonStyle.Primary),
+        .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId("giveaway_list")
         .setLabel("Danh sách")
@@ -63,7 +78,7 @@ module.exports = {
       if (btnInteraction.customId === "giveaway_join") {
         participants.add(btnInteraction.user.id);
         await btnInteraction.reply({
-          content: `Bạn đã tham gia giveaway!`,
+          content: `✅ Bạn đã tham gia giveaway thành công!`,
           ephemeral: true,
         });
       }
@@ -77,7 +92,7 @@ module.exports = {
             : "Chưa có ai tham gia.";
 
         await btnInteraction.reply({
-          content: `**Danh sách người tham gia:**\n${list}`,
+          content: `👥 **Danh sách người tham gia (${participants.size}):**\n${list}`,
           ephemeral: true,
         });
       }
@@ -92,16 +107,26 @@ module.exports = {
       }
 
       const resultEmbed = new EmbedBuilder()
-        .setColor("#2b2d31")
-        .setTitle("Giveaway Kết Thúc")
-        .setDescription(
-          winner
-            ? `Chúc mừng ${winner} đã thắng **${prize}**!`
-            : "Không có ai tham gia giveaway."
+        .setColor(winner ? "#57f287" : "#ed4245")
+        .setAuthor({ name: "MINI GAMES" })
+        .setTitle("🎉 Kết Quả Giveaway")
+        .addFields(
+          {
+            name: "Phần Thưởng",
+            value: `🎁 **${prize}**`,
+            inline: true,
+          },
+          {
+            name: "Người May Mắn",
+            value: winner ? `🏆 ${winner}` : "❌ Không có ai tham gia",
+            inline: true,
+          }
         )
+        .setFooter({ text: "Giveaway đã kết thúc" })
         .setTimestamp();
 
       await message.edit({ embeds: [resultEmbed], components: [] });
     });
   },
 };
+

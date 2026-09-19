@@ -13,20 +13,49 @@ module.exports.handleButton = async (interaction) => {
     const botChoice = choices[Math.floor(Math.random() * choices.length)];
 
     let result = "";
-    if (userChoice === botChoice) result = "⚖️ Hòa nhau!";
-    else if (
+    let embedColor = "#2ec99d";
+    if (userChoice === botChoice) {
+      result = "⚖️ Hòa nhau!";
+      embedColor = "#fee75c";
+    } else if (
       (userChoice === "rock" && botChoice === "scissors") ||
       (userChoice === "paper" && botChoice === "rock") ||
       (userChoice === "scissors" && botChoice === "paper")
-    )
+    ) {
       result = "🎉 Bạn thắng!";
-    else result = "😢 Bot thắng!";
+      embedColor = "#57f287";
+    } else {
+      result = "😢 Bot thắng!";
+      embedColor = "#ed4245";
+    }
+
+    const resultEmbed = new EmbedBuilder()
+      .setColor(embedColor)
+      .setAuthor({ name: "MINI GAMES" })
+      .setTitle("Kết Quả Oẳn Tù Tì")
+      .addFields(
+        {
+          name: "Lựa Chọn Của Bạn",
+          value: icon(userChoice),
+          inline: true,
+        },
+        {
+          name: "Lựa Chọn Của DinoBot",
+          value: icon(botChoice),
+          inline: true,
+        },
+        {
+          name: "Kết Quả",
+          value: `**${result}**`,
+          inline: false,
+        }
+      )
+      .setFooter({ text: `Người chơi: ${interaction.user.tag}` })
+      .setTimestamp();
 
     return interaction.update({
-      content: `🫵 Bạn chọn: **${icon(userChoice)}**\n🤖 Bot chọn: **${icon(
-        botChoice
-      )}**\n\n👉 ${result}`,
-      components: [], // Xóa nút sau khi chọn
+      embeds: [resultEmbed],
+      components: [], // Remove buttons after playing
     });
   }
 

@@ -60,8 +60,9 @@ module.exports = {
       await target.roles.add(role);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287") // Màu xanh lá Success
-        .setAuthor({ name: "Cấp Vai Trò Thành Công" })
+        .setColor("#57f287")
+        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
+        .setTitle("🛡️ Cấp Vai Trò Thành Viên")
         .addFields(
           { name: "Thành viên", value: `${target}`, inline: true },
           { name: "Vai trò", value: `${role}`, inline: true },

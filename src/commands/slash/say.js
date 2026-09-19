@@ -4,7 +4,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("say")
-    .setDescription("Bot sẽ chào lại người dùng")
+    .setDescription("Bot sẽ gửi lại lời nhắn của bạn")
     .addStringOption((option) =>
       option
         .setName("message")
@@ -14,16 +14,29 @@ module.exports = {
   async execute(interaction) {
     const message = interaction.options.getString("message");
 
-    // Tạo embed để trả về
     const embed = new EmbedBuilder()
-      .setColor("#2b2d31")
-      .setAuthor({
-        name: `${interaction.user.username} nói rằng:`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      .setColor("#2ec99d")
+      .setAuthor({ name: "LỜI NHẮN" })
+      .setTitle("📢 Thông Điệp")
+      .addFields(
+        {
+          name: "Người Gửi",
+          value: `${interaction.user} (\`${interaction.user.tag}\`)`,
+          inline: true,
+        },
+        {
+          name: "Nội Dung",
+          value: `>>> ${message}`,
+          inline: false,
+        }
+      )
+      .setFooter({
+        text: `Gửi qua DinoBot`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       })
-      .setDescription(`>>> ${message}`)
       .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });
   },
 };
+

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,8 +24,26 @@ module.exports = {
 
     const result = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    await interaction.reply(
-      `Random từ **${min}** đến **${max}** → bạn được: **${result}**`
-    );
+    const embed = new EmbedBuilder()
+      .setColor("#2ec99d")
+      .setAuthor({ name: "TIỆN ÍCH" })
+      .setTitle("🔢 Quay Số Ngẫu Nhiên")
+      .addFields(
+        {
+          name: "Phạm Vi",
+          value: `${min} ➔ ${max}`,
+          inline: true,
+        },
+        {
+          name: "Con Số May Mắn",
+          value: `🎯 **${result}**`,
+          inline: true,
+        }
+      )
+      .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}` })
+      .setTimestamp();
+
+    await interaction.reply({ embeds: [embed] });
   },
 };
+

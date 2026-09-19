@@ -16,12 +16,12 @@ module.exports = {
     const avatarURL = user.displayAvatarURL({ dynamic: true, size: 1024 });
 
     const embed = new EmbedBuilder()
-      .setColor("#2b2d31")
-      .setAuthor({ name: user.tag, iconURL: avatarURL })
-      .setTitle("Ảnh Đại Diện")
+      .setColor("#2ec99d")
+      .setAuthor({ name: "TIỆN ÍCH" })
+      .setTitle(`🖼️ Ảnh Đại Diện: ${user.username}`)
       .setURL(avatarURL)
       .setImage(avatarURL)
-      .setDescription(`[Tải xuống ảnh đại diện chất lượng cao](${avatarURL})`)
+      .setDescription(`[Tải xuống ảnh chất lượng cao](${avatarURL})`)
       .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
       .setTimestamp();
 

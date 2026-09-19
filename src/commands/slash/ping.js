@@ -10,11 +10,21 @@ module.exports = {
 
     // Tạo embed
     const embed = new EmbedBuilder()
-      .setColor(0x2ec99d)
-      .setTitle("🏓 Pong!")
-      .setDescription(`Ping hiện tại của bot: **${wsPing}ms**`)
-      .setFooter({ text: `Requested by ${interaction.user.username}` });
+      .setColor("#2ec99d")
+      .setAuthor({ name: "HỆ THỐNG" })
+      .setTitle("🏓 Độ Trễ Bot")
+      .addFields({
+        name: "WebSocket Ping",
+        value: `📶 **${wsPing}ms**`,
+        inline: false,
+      })
+      .setFooter({
+        text: `Yêu cầu bởi ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
+      .setTimestamp();
 
     await interaction.reply({ embeds: [embed] });
   },
 };
+

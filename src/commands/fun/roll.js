@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,8 +21,27 @@ module.exports = {
     }
 
     const result = Math.floor(Math.random() * sides) + 1;
-    await interaction.reply(
-      `🎲 Bạn tung được **${result}** (trong ${sides} mặt)!`
-    );
+
+    const embed = new EmbedBuilder()
+      .setColor("#2ec99d")
+      .setAuthor({ name: "MINI GAMES" })
+      .setTitle("🎲 Tung Xúc Xắc")
+      .addFields(
+        {
+          name: "Số Mặt",
+          value: `${sides} mặt (1 - ${sides})`,
+          inline: true,
+        },
+        {
+          name: "Kết Quả",
+          value: `🎉 **${result}**`,
+          inline: true,
+        }
+      )
+      .setFooter({ text: `Người tung: ${interaction.user.tag}` })
+      .setTimestamp();
+
+    await interaction.reply({ embeds: [embed] });
   },
 };
+
