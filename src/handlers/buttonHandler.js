@@ -59,6 +59,26 @@ module.exports.handleButton = async (interaction) => {
     });
   }
 
+  // 🎲 Đổ lại xúc xắc
+  if (interaction.customId.startsWith("dice_reroll_")) {
+    const [, , countStr, sidesStr] = interaction.customId.split("_");
+    const count = parseInt(countStr) || 1;
+    const sides = parseInt(sidesStr) || 6;
+
+    const rolls = Array.from(
+      { length: count },
+      () => Math.floor(Math.random() * sides) + 1
+    );
+
+    const { createDiceEmbed } = require("../commands/fun/doxucxac");
+    const embed = createDiceEmbed(interaction.user, count, sides, rolls);
+
+    return interaction.update({
+      embeds: [embed],
+    });
+  }
+
+
   // 📊 Poll
   if (interaction.customId.startsWith("poll_")) {
     const [, pollId, choiceIndex] = interaction.customId.split("_");
