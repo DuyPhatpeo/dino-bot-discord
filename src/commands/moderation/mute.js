@@ -38,7 +38,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#fee75c")
       .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-      .setTitle("⏳ Tắt Tiếng Thành Viên (Timeout)")
+      .setTitle("Tắt Tiếng Thành Viên (Timeout)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị tắt tiếng", value: `${target} (\`${target.id}\`)`, inline: true },

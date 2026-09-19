@@ -25,21 +25,22 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "MINI GAMES" })
-      .setTitle("🎲 Tung Xúc Xắc")
+      .setTitle("Tung Xúc Xắc")
       .addFields(
         {
           name: "Số Mặt",
-          value: `${sides} mặt (1 - ${sides})`,
+          value: `${sides} mặt`,
           inline: true,
         },
         {
           name: "Kết Quả",
-          value: `🎉 **${result}**`,
+          value: `🎲 **${result}**`,
           inline: true,
         }
       )
       .setFooter({ text: `Người tung: ${interaction.user.tag}` })
       .setTimestamp();
+
 
     await interaction.reply({ embeds: [embed] });
   },

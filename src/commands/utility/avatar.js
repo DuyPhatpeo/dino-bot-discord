@@ -18,7 +18,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "TIỆN ÍCH" })
-      .setTitle(`🖼️ Ảnh Đại Diện: ${user.username}`)
+      .setTitle(`Ảnh Đại Diện: ${user.username}`)
       .setURL(avatarURL)
       .setImage(avatarURL)
       .setDescription(`[Tải xuống ảnh chất lượng cao](${avatarURL})`)

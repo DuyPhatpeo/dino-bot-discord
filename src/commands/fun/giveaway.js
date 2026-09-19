@@ -30,7 +30,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "MINI GAMES" })
-      .setTitle("🎉 Sự Kiện Giveaway")
+      .setTitle("Giveaway Máy Chủ")
       .addFields(
         {
           name: "Phần Thưởng",
@@ -39,12 +39,12 @@ module.exports = {
         },
         {
           name: "Thời Gian",
-          value: `⌛ **${duration} giây**`,
+          value: `⏳ **${duration} giây**`,
           inline: true,
         },
         {
           name: "Cách Tham Gia",
-          value: "Bấm nút **Tham gia** bên dưới để có cơ hội nhận quà!",
+          value: "Bấm nút **Tham gia** bên dưới để nhận vé may mắn.",
           inline: false,
         }
       )
@@ -78,7 +78,7 @@ module.exports = {
       if (btnInteraction.customId === "giveaway_join") {
         participants.add(btnInteraction.user.id);
         await btnInteraction.reply({
-          content: `✅ Bạn đã tham gia giveaway thành công!`,
+          content: "Bạn đã tham gia giveaway thành công!",
           ephemeral: true,
         });
       }
@@ -92,7 +92,7 @@ module.exports = {
             : "Chưa có ai tham gia.";
 
         await btnInteraction.reply({
-          content: `👥 **Danh sách người tham gia (${participants.size}):**\n${list}`,
+          content: `**Danh sách người tham gia (${participants.size}):**\n${list}`,
           ephemeral: true,
         });
       }
@@ -124,7 +124,7 @@ module.exports = {
       const resultEmbed = new EmbedBuilder()
         .setColor(winner ? "#57f287" : "#ed4245")
         .setAuthor({ name: "MINI GAMES" })
-        .setTitle("🎉 Kết Quả Giveaway")
+        .setTitle("Kết Quả Giveaway")
         .addFields(
           {
             name: "Phần Thưởng",
@@ -133,7 +133,7 @@ module.exports = {
           },
           {
             name: "Người May Mắn",
-            value: winner ? `🏆 ${winner}` : "❌ Không có ai tham gia",
+            value: winner ? `🏆 ${winner}` : "Không có ai tham gia",
             inline: true,
           }
         )
@@ -150,5 +150,6 @@ module.exports = {
     });
   },
 };
+
 
 

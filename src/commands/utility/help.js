@@ -24,7 +24,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "TRUNG TÂM TRỢ GIÚP" })
-      .setTitle("📚 Danh Sách Lệnh DinoBot")
+      .setTitle("Danh Sách Lệnh Hỗ Trợ")
       .setDescription(
         "Dưới đây là các lệnh bạn có thể sử dụng. Gõ `/<lệnh>` để kích hoạt."
       );
@@ -34,13 +34,14 @@ module.exports = {
       const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
 
       embed.addFields({
-        name: `📁 ${categoryName}`,
+        name: categoryName,
         value: commands
           .map((c) => `**\`/${c.name}\`** • *${c.desc}*`)
           .join("\n"),
         inline: false,
       });
     }
+
 
     embed
       .setFooter({

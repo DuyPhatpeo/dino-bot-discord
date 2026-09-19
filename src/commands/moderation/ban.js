@@ -44,7 +44,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#ed4245")
       .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-      .setTitle("🔨 Cấm Thành Viên (Ban)")
+      .setTitle("Cấm Thành Viên (Ban)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị cấm", value: `${target} (\`${target.id}\`)`, inline: true },

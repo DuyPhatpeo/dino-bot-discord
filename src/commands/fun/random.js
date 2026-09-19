@@ -27,21 +27,22 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "TIỆN ÍCH" })
-      .setTitle("🔢 Quay Số Ngẫu Nhiên")
+      .setTitle("Quay Số Ngẫu Nhiên")
       .addFields(
         {
           name: "Phạm Vi",
-          value: `${min} ➔ ${max}`,
+          value: `${min} → ${max}`,
           inline: true,
         },
         {
-          name: "Con Số May Mắn",
+          name: "Kết Quả",
           value: `🎯 **${result}**`,
           inline: true,
         }
       )
       .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}` })
       .setTimestamp();
+
 
     await interaction.reply({ embeds: [embed] });
   },

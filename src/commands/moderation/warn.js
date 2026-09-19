@@ -51,9 +51,9 @@ module.exports = {
         });
 
       const embed = new EmbedBuilder()
-        .setColor("#fee75c") // Màu vàng cảnh báo
+        .setColor("#fee75c")
         .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("⚠️ Cảnh Báo Thành Viên")
+        .setTitle("Cảnh Báo Thành Viên")
         .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
         .addFields(
           {
@@ -72,6 +72,7 @@ module.exports = {
             inline: false,
           }
         )
+
         .setFooter({
           text: `Thực hiện bởi ${interaction.user.tag}`,
           iconURL: interaction.user.displayAvatarURL({ dynamic: true }),

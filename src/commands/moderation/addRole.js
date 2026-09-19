@@ -62,7 +62,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor("#57f287")
         .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("🛡️ Cấp Vai Trò Thành Viên")
+        .setTitle("Cấp Vai Trò Thành Viên")
         .addFields(
           { name: "Thành viên", value: `${target}`, inline: true },
           { name: "Vai trò", value: `${role}`, inline: true },

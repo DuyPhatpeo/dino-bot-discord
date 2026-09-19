@@ -34,45 +34,46 @@ module.exports = {
         name: "THÔNG TIN MÁY CHỦ",
         iconURL: guild.iconURL({ dynamic: true }),
       })
-      .setTitle(`🏰 ${guild.name}`)
+      .setTitle(guild.name)
       .setThumbnail(guild.iconURL({ dynamic: true, size: 1024 }))
       .addFields(
         {
-          name: "👑 Chủ Sở Hữu",
+          name: "Chủ Sở Hữu",
           value: `${owner.user} (\`${owner.user.tag}\`)`,
           inline: true,
         },
         {
-          name: "📅 Ngày Thành Lập",
+          name: "Ngày Thành Lập",
           value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:D>\n(<t:${Math.floor(guild.createdTimestamp / 1000)}:R>)`,
           inline: true,
         },
         {
-          name: "🆔 ID Server",
+          name: "ID Máy Chủ",
           value: `\`${guild.id}\``,
           inline: true,
         },
         {
-          name: `👥 Thành Viên (${totalMembers})`,
-          value: `👤 Người dùng: **${humanCount > 0 ? humanCount : totalMembers}**\n🤖 Bot: **${botCount}**`,
+          name: `Thành Viên (${totalMembers})`,
+          value: `👤 Người: **${humanCount > 0 ? humanCount : totalMembers}**\n🤖 Bot: **${botCount}**`,
           inline: true,
         },
         {
-          name: `💬 Kênh (${guild.channels.cache.size})`,
-          value: `📝 Text: **${textChannels}**\n🔊 Voice: **${voiceChannels}**\n📁 Danh mục: **${categoryChannels}**`,
+          name: `Kênh (${guild.channels.cache.size})`,
+          value: `Text: **${textChannels}** • Voice: **${voiceChannels}** • Danh mục: **${categoryChannels}**`,
           inline: true,
         },
         {
-          name: `🚀 Server Boost`,
-          value: `⭐ Cấp độ: **${boostTier}**\n💎 Số lượt boost: **${boostCount}**`,
+          name: "Server Boost",
+          value: `Cấp độ: **${boostTier}**\nLượt boost: **${boostCount}**`,
           inline: true,
         },
         {
-          name: `🏷️ Vai Trò & Biểu Cảm`,
-          value: `🎭 Emojis: **${emojisCount}**\n✨ Stickers: **${stickersCount}**\n🛡️ Roles: **${rolesCount}**`,
+          name: "Vai Trò & Biểu Cảm",
+          value: `Emojis: **${emojisCount}** • Stickers: **${stickersCount}** • Roles: **${rolesCount}**`,
           inline: false,
         }
       )
+
       .setFooter({
         text: `Yêu cầu bởi ${interaction.user.tag}`,
         iconURL: interaction.user.displayAvatarURL({ dynamic: true }),

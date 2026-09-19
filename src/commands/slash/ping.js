@@ -12,7 +12,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "HỆ THỐNG" })
-      .setTitle("🏓 Độ Trễ Bot")
+      .setTitle("Độ Trễ Bot")
       .addFields({
         name: "WebSocket Ping",
         value: `📶 **${wsPing}ms**`,
@@ -23,6 +23,7 @@ module.exports = {
         iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       })
       .setTimestamp();
+
 
     await interaction.reply({ embeds: [embed] });
   },

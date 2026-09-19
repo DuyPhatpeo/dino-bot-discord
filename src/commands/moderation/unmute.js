@@ -39,7 +39,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor("#57f287")
         .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("🔊 Gỡ Tắt Tiếng Thành Viên")
+        .setTitle("Gỡ Tắt Tiếng Thành Viên")
         .setThumbnail(target.user.displayAvatarURL({ dynamic: true, size: 512 }))
         .addFields(
           {

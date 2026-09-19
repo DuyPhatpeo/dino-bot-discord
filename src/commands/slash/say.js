@@ -17,7 +17,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
       .setAuthor({ name: "LỜI NHẮN" })
-      .setTitle("📢 Thông Điệp")
+      .setTitle("Thông Điệp")
       .addFields(
         {
           name: "Người Gửi",

@@ -32,11 +32,11 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor("#57f287")
         .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("🧹 Dọn Dẹp Tin Nhắn")
+        .setTitle("Dọn Dẹp Tin Nhắn")
         .addFields(
           {
             name: "Số Lượng Đã Xóa",
-            value: `🗑️ **${amount} tin nhắn**`,
+            value: `**${amount}** tin nhắn`,
             inline: true,
           },
           {
@@ -50,6 +50,7 @@ module.exports = {
             inline: true,
           }
         )
+
         .setFooter({ text: "Lưu ý: Tin nhắn quá 14 ngày không thể xóa tự động" })
         .setTimestamp();
 
