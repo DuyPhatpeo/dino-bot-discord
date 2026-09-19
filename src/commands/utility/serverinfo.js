@@ -3,19 +3,30 @@ const { SlashCommandBuilder, EmbedBuilder, ChannelType } = require("discord.js")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("serverinfo")
-    .setDescription("Xem thông tin chi tiết của server"),
+    .setDescription("Xem thông tin chi tiết và thống kê của máy chủ"),
 
   async execute(interaction) {
     const { guild } = interaction;
     const owner = await guild.fetchOwner();
 
-    // Lấy số lượng bot và user thực
+    // Thống kê thành viên
     const totalMembers = guild.memberCount;
-    // (Optional: có thể đếm member thường và bot nếu fetch members, nhưng để tối ưu thì dùng tổng)
+    const botCount = guild.members.cache.filter((m) => m.user.bot).size;
+    const humanCount = totalMembers - botCount;
 
+    // Thống kê kênh
     const textChannels = guild.channels.cache.filter((c) => c.type === ChannelType.GuildText).size;
     const voiceChannels = guild.channels.cache.filter((c) => c.type === ChannelType.GuildVoice).size;
-    const roles = guild.roles.cache.size;
+    const categoryChannels = guild.channels.cache.filter((c) => c.type === ChannelType.GuildCategory).size;
+
+    // Thống kê vai trò & emoji
+    const rolesCount = guild.roles.cache.size - 1; // Loại trừ @everyone
+    const emojisCount = guild.emojis.cache.size;
+    const stickersCount = guild.stickers.cache.size;
+
+    // Boost tier
+    const boostTier = guild.premiumTier ? `Level ${guild.premiumTier}` : "Chưa có Level";
+    const boostCount = guild.premiumSubscriptionCount || 0;
 
     const embed = new EmbedBuilder()
       .setColor("#2ec99d")
@@ -27,35 +38,52 @@ module.exports = {
       .setThumbnail(guild.iconURL({ dynamic: true, size: 1024 }))
       .addFields(
         {
-          name: "Chủ sở hữu",
+          name: "👑 Chủ Sở Hữu",
           value: `${owner.user} (\`${owner.user.tag}\`)`,
-          inline: true
+          inline: true,
         },
         {
-          name: "Ngày tạo",
-          value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:F>\n(<t:${Math.floor(guild.createdTimestamp / 1000)}:R>)`,
-          inline: true
-        },
-        { name: "\u200B", value: "\u200B", inline: false }, // Dòng trống chia layout
-        {
-          name: `Thành viên (${totalMembers})`,
-          value: `Lưu trữ tổng cộng **${totalMembers}** thành viên.`,
-          inline: true
+          name: "📅 Ngày Thành Lập",
+          value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:D>\n(<t:${Math.floor(guild.createdTimestamp / 1000)}:R>)`,
+          inline: true,
         },
         {
-          name: `Kênh (${guild.channels.cache.size})`,
-          value: `**${textChannels}** Text | **${voiceChannels}** Voice`,
-          inline: true
+          name: "🆔 ID Server",
+          value: `\`${guild.id}\``,
+          inline: true,
         },
         {
-          name: `Vai trò (${roles})`,
-          value: `Tổng số vai trò được cấp phát trong server.`,
-          inline: true
+          name: `👥 Thành Viên (${totalMembers})`,
+          value: `👤 Người dùng: **${humanCount > 0 ? humanCount : totalMembers}**\n🤖 Bot: **${botCount}**`,
+          inline: true,
+        },
+        {
+          name: `💬 Kênh (${guild.channels.cache.size})`,
+          value: `📝 Text: **${textChannels}**\n🔊 Voice: **${voiceChannels}**\n📁 Danh mục: **${categoryChannels}**`,
+          inline: true,
+        },
+        {
+          name: `🚀 Server Boost`,
+          value: `⭐ Cấp độ: **${boostTier}**\n💎 Số lượt boost: **${boostCount}**`,
+          inline: true,
+        },
+        {
+          name: `🏷️ Vai Trò & Biểu Cảm`,
+          value: `🎭 Emojis: **${emojisCount}**\n✨ Stickers: **${stickersCount}**\n🛡️ Roles: **${rolesCount}**`,
+          inline: false,
         }
       )
-      .setFooter({ text: `ID Máy chủ: ${guild.id}` })
+      .setFooter({
+        text: `Yêu cầu bởi ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
       .setTimestamp();
+
+    if (guild.bannerURL()) {
+      embed.setImage(guild.bannerURL({ size: 1024 }));
+    }
 
     await interaction.reply({ embeds: [embed] });
   },
 };
+
