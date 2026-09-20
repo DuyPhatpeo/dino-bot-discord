@@ -19,12 +19,18 @@
 
 ### 🛡️ Quản trị Server (Moderation)
 * `/ban`: Cấm thành viên vi phạm khỏi server.
+* `/unban`: Gỡ cấm (Unban) người dùng bằng User ID.
 * `/kick`: Trục xuất thành viên khỏi server.
 * `/mute`: Tạm khóa chat (Timeout) thành viên trong thời gian nhất định.
 * `/unmute`: Gỡ phạt timeout cho thành viên.
 * `/warn`: Cảnh cáo thành viên vi phạm.
 * `/clear`: Xóa tin nhắn hàng loạt theo số lượng yêu cầu.
+* `/lock`: Khóa kênh chat (chặn gửi tin nhắn) khi có sự cố.
+* `/unlock`: Mở khóa lại kênh chat cho thành viên.
+* `/slowmode`: Cài đặt thời gian làm chậm (giãn cách gửi tin nhắn) cho kênh.
 * `/addrole`: Thêm hoặc gỡ Role cho thành viên.
+* `/setwelcome`: Cài đặt kênh gửi thông báo chào đón thành viên mới.
+* `/settempvoice`: Cài đặt kênh kích hoạt tạo phòng Voice tự động (Join-to-Create).
 * `/nickname`: Đổi biệt danh của thành viên trong server.
 
 ### 🎲 Giải trí & Trò chơi (Fun)
@@ -35,6 +41,9 @@
 * `/random`: Chọn ngẫu nhiên một con số hoặc lựa chọn trong danh sách.
 
 ### 🛠️ Tiện ích & Thông tin (Utility)
+* `/userinfo`: Xem thông tin chi tiết về người dùng (ngày tạo tài khoản, ngày join server, roles,...).
+* `/poll`: Tạo cuộc bình chọn với các nút bấm tương tác trực tiếp.
+* `/remindme`: Đặt lịch hẹn giờ để bot gửi thông báo nhắc nhở công việc.
 * `/serverinfo`: Hiển thị thông tin chi tiết về server (thành viên, kênh, roles, ngày tạo,...).
 * `/avatar`: Xem và tải ảnh đại diện chất lượng cao của thành viên hoặc server.
 * `/help`: Hiển thị danh sách toàn bộ các lệnh và hướng dẫn sử dụng.
