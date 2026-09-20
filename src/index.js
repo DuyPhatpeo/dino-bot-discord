@@ -32,6 +32,10 @@ if (fs.existsSync(commandsPath)) {
   for (const file of commandFiles) {
     const command = require(file);
     if (command?.data?.name && command?.execute) {
+      if (!command.category) {
+        const relativeDir = path.relative(commandsPath, path.dirname(file));
+        if (relativeDir) command.category = relativeDir;
+      }
       client.commands.set(command.data.name, command);
     }
   }
