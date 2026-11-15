@@ -27,7 +27,7 @@ module.exports = {
     const botMember = interaction.guild.members.me;
     if (!botMember.permissions.has(PermissionFlagsBits.BanMembers)) {
       return interaction.reply({
-        content: "❌ Bot không có quyền `Cấm thành viên` (Ban Members) để thực hiện lệnh này.",
+        content: "Bot không có quyền `Cấm thành viên` (Ban Members) để thực hiện lệnh này.",
         ephemeral: true,
       });
     }
@@ -38,7 +38,7 @@ module.exports = {
 
       if (!banInfo) {
         return interaction.reply({
-          content: `❌ Không tìm thấy người dùng có ID \`${userId}\` trong danh sách cấm của server.`,
+          content: `Không tìm thấy người dùng có ID \`${userId}\` trong danh sách cấm của server.`,
           ephemeral: true,
         });
       }
@@ -46,8 +46,8 @@ module.exports = {
       await interaction.guild.members.unban(userId, reason);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287")
-        .setTitle("Gỡ Cấm Thành Viên (Unban)")
+        .setColor("#10b981")
+        .setTitle("🔓 Gỡ Cấm Thành Viên (Unban)")
         .addFields(
           {
             name: "Người được gỡ cấm",
@@ -67,7 +67,6 @@ module.exports = {
         )
         .setFooter({
           text: `Unban bởi ${interaction.user.tag}`,
-          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
         })
         .setTimestamp();
 
@@ -75,7 +74,7 @@ module.exports = {
     } catch (error) {
       console.error("Lỗi khi unban:", error);
       return interaction.reply({
-        content: "❌ Đã xảy ra lỗi khi cố gắng gỡ cấm cho người dùng này.",
+        content: "Đã xảy ra lỗi khi cố gắng gỡ cấm cho người dùng này.",
         ephemeral: true,
       });
     }

@@ -51,7 +51,7 @@ module.exports = {
 
     if (durationMs <= 0 || durationMs > 14 * 24 * 60 * 60 * 1000) {
       return interaction.reply({
-        content: "❌ Định dạng thời gian không hợp lệ! Vui lòng nhập từ 5 giây đến tối đa 14 ngày (Ví dụ: `10m`, `1h30m`, `30s`).",
+        content: "Định dạng thời gian không hợp lệ! Vui lòng nhập từ 5 giây đến tối đa 14 ngày (Ví dụ: `10m`, `1h30m`, `30s`).",
         ephemeral: true,
       });
     }
@@ -59,7 +59,7 @@ module.exports = {
     const targetTimestamp = Math.floor((Date.now() + durationMs) / 1000);
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
+      .setColor("#06b6d4")
       .setTitle("⏰ Đã Đặt Lịch Nhắc Nhở")
       .setDescription(`DinoBot sẽ nhắc bạn sau: <t:${targetTimestamp}:R> (<t:${targetTimestamp}:F>)`)
       .addFields(
@@ -78,8 +78,8 @@ module.exports = {
     setTimeout(async () => {
       try {
         const reminderEmbed = new EmbedBuilder()
-          .setColor("#fee75c")
-          .setTitle("⏰ Lời Nhắc Của Bạn!")
+          .setColor("#06b6d4")
+          .setTitle("⏰ Lời Nhắc Của Bạn")
           .setDescription(`Chào ${interaction.user}, đây là nội dung bạn đã nhờ tôi nhắc:`)
           .addFields(
             {
@@ -94,7 +94,7 @@ module.exports = {
         const channel = interaction.channel;
         if (channel) {
           await channel.send({
-            content: `🔔 ${interaction.user} ơi, bạn có một lời nhắc!`,
+            content: `${interaction.user}, bạn có một lời nhắc:`,
             embeds: [reminderEmbed],
           });
         } else {

@@ -13,9 +13,8 @@ module.exports = {
 
   async execute(interaction) {
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({ name: "MINI GAMES" })
-      .setTitle("Bao – Búa – Kéo")
+      .setColor("#8b5cf6")
+      .setTitle("✊ Bao – Búa – Kéo")
       .addFields(
         {
           name: "Thử Thách",
@@ -30,21 +29,17 @@ module.exports = {
       )
       .setFooter({ text: "Chọn nước đi bên dưới" });
 
-
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("rock")
-        .setEmoji("✊")
         .setLabel("Búa")
         .setStyle(ButtonStyle.Secondary),
       new ButtonBuilder()
         .setCustomId("scissors")
-        .setEmoji("✌️")
         .setLabel("Kéo")
         .setStyle(ButtonStyle.Secondary),
       new ButtonBuilder()
         .setCustomId("paper")
-        .setEmoji("✋")
         .setLabel("Bao")
         .setStyle(ButtonStyle.Secondary)
     );

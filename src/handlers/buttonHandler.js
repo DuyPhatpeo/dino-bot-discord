@@ -4,35 +4,40 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
+const { handleMusicButton } = require("../utils/musicManager");
 
 module.exports.handleButton = async (interaction) => {
-  // 🎮 Oẳn tù tì
+  // 🎵 Music controls & queue pagination
+  if (interaction.customId.startsWith("music_") || interaction.customId.startsWith("queue_")) {
+    return handleMusicButton(interaction);
+  }
+
+  // Oẳn tù tì
   if (["rock", "paper", "scissors"].includes(interaction.customId)) {
     const userChoice = interaction.customId;
     const choices = ["rock", "paper", "scissors"];
     const botChoice = choices[Math.floor(Math.random() * choices.length)];
 
     let result = "";
-    let embedColor = "#2ec99d";
+    let color = "#8b5cf6";
     if (userChoice === botChoice) {
-      result = "⚖️ Hòa nhau!";
-      embedColor = "#fee75c";
+      result = "Hòa nhau!";
+      color = "#f59e0b";
     } else if (
       (userChoice === "rock" && botChoice === "scissors") ||
       (userChoice === "paper" && botChoice === "rock") ||
       (userChoice === "scissors" && botChoice === "paper")
     ) {
-      result = "🎉 Bạn thắng!";
-      embedColor = "#57f287";
+      result = "Bạn thắng!";
+      color = "#10b981";
     } else {
-      result = "😢 Bot thắng!";
-      embedColor = "#ed4245";
+      result = "Bot thắng!";
+      color = "#ef4444";
     }
 
     const resultEmbed = new EmbedBuilder()
-      .setColor(embedColor)
-      .setAuthor({ name: "MINI GAMES" })
-      .setTitle("Kết Quả Oẳn Tù Tì")
+      .setColor(color)
+      .setTitle("✊ Kết Quả Oẳn Tù Tì")
       .addFields(
         {
           name: "Lựa Chọn Của Bạn",
@@ -79,7 +84,7 @@ module.exports.handleButton = async (interaction) => {
   }
 
 
-  // 📊 Poll
+  // Poll
   if (interaction.customId.startsWith("poll_")) {
     const [, pollId, choiceIndex] = interaction.customId.split("_");
     const poll = interaction.client.polls?.get(pollId);
@@ -87,7 +92,7 @@ module.exports.handleButton = async (interaction) => {
     // Nếu poll không tồn tại hoặc hết hạn → disable luôn nút
     if (!poll) {
       return interaction.update({
-        content: "❌ Poll đã hết hạn hoặc không tồn tại.",
+        content: "Poll đã hết hạn hoặc không tồn tại.",
         components: disableAllButtons(interaction.message.components),
       });
     }
@@ -101,14 +106,14 @@ module.exports.handleButton = async (interaction) => {
     );
 
     const embed = new EmbedBuilder()
-      .setColor(0x00ff00)
-      .setTitle("📊 " + poll.question)
+      .setColor("#3b82f6")
+      .setTitle(`🗳️ ${poll.question}`)
       .setDescription(
         poll.choices
           .map((c, i) => {
             const count = counts[i];
             const percent = total === 0 ? 0 : Math.round((count / total) * 100);
-            const bar = "🟦".repeat(Math.round(percent / 10)) || "⬜";
+            const bar = "■".repeat(Math.round(percent / 10)) || "□";
             return `**${i + 1}. ${c}**\n${bar} ${count} vote (${percent}%)`;
           })
           .join("\n\n")
@@ -120,27 +125,27 @@ module.exports.handleButton = async (interaction) => {
         components: poll.message.components,
       });
     } catch (err) {
-      console.error("❌ Lỗi khi update poll:", err);
+      console.error("[Poll Error]:", err);
     }
 
     return interaction.reply({
-      content: `🗳️ Bạn đã vote cho **${poll.choices[choiceIndex]}**`,
+      content: `Bạn đã vote cho **${poll.choices[choiceIndex]}**`,
       ephemeral: true,
     });
   }
 };
 
-// helper icon
+// Helper icon
 function icon(choice) {
   switch (choice) {
     case "rock":
-      return "✊ Búa";
+      return "Búa";
     case "paper":
-      return "✋ Bao";
+      return "Bao";
     case "scissors":
-      return "✌️ Kéo";
+      return "Kéo";
     default:
-      return "❓"; // fallback nếu lỡ sai customId
+      return "Không rõ";
   }
 }
 

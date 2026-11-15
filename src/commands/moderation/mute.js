@@ -27,7 +27,7 @@ module.exports = {
 
     if (!member.moderatable) {
       return interaction.reply({
-        content: "❌ Không thể mute thành viên này!",
+        content: "Không thể mute thành viên này!",
         ephemeral: true,
       });
     }
@@ -36,9 +36,8 @@ module.exports = {
     await member.timeout(duration, reason);
 
     const embed = new EmbedBuilder()
-      .setColor("#fee75c")
-      .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-      .setTitle("Tắt Tiếng Thành Viên (Timeout)")
+      .setColor("#f59e0b")
+      .setTitle("🔇 Tắt Tiếng Thành Viên (Timeout)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị tắt tiếng", value: `${target} (\`${target.id}\`)`, inline: true },
@@ -48,7 +47,6 @@ module.exports = {
       )
       .setFooter({
         text: `Mute bởi ${interaction.user.tag}`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
       })
       .setTimestamp();
 

@@ -18,8 +18,8 @@ module.exports = {
     const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
     const embed = new EmbedBuilder()
-      .setColor(member?.displayHexColor || "#2ec99d")
-      .setTitle(`Thông Tin Người Dùng • ${user.username}`)
+      .setColor(member?.displayHexColor || "#5865F2")
+      .setTitle(`👤 Thông Tin Người Dùng • ${user.username}`)
       .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         {

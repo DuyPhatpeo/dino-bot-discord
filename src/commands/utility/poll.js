@@ -66,21 +66,20 @@ module.exports = {
         new ButtonBuilder()
           .setCustomId(`poll_${pollId}_${index}`)
           .setLabel(`${index + 1}. ${opt.slice(0, 75)}`)
-          .setStyle(ButtonStyle.Primary)
+          .setStyle(ButtonStyle.Secondary)
       );
     });
 
     const description = options
-      .map((opt, index) => `**${index + 1}. ${opt}**\n⬜ 0 vote (0%)`)
+      .map((opt, index) => `**${index + 1}. ${opt}**\n□ 0 vote (0%)`)
       .join("\n\n");
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setTitle("📊 " + question)
+      .setColor("#3b82f6")
+      .setTitle(`🗳️ ${question}`)
       .setDescription(description)
       .setFooter({
         text: `Bình chọn tạo bởi ${interaction.user.tag} • Bấm nút bên dưới để vote`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       })
       .setTimestamp();
 

@@ -13,7 +13,7 @@ module.exports = {
         if (channel && channel.isTextBased()) {
           const embed = new EmbedBuilder()
             .setColor("#2ec99d")
-            .setTitle("Chào Mừng Thành Viên Mới!")
+            .setTitle("👋 Chào Mừng Thành Viên Mới")
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
             .setDescription(
               `Chào mừng ${member} đã tham gia **${member.guild.name}**!\n` +
@@ -34,7 +34,7 @@ module.exports = {
             .setFooter({ text: `ID: ${member.id}` })
             .setTimestamp();
 
-          await channel.send({ content: `Chào mừng ${member}! 🎉`, embeds: [embed] });
+          await channel.send({ content: `Chào mừng ${member} đến với máy chủ!`, embeds: [embed] });
         }
       } catch (err) {
         console.error(`Không thể gửi tin nhắn welcome tại guild ${member.guild.id}:`, err);

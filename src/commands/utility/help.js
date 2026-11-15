@@ -1,4 +1,13 @@
+// src/commands/utility/help.js
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+
+const CATEGORY_META = {
+  music: { name: "🎵 Âm Nhạc", order: 1 },
+  moderation: { name: "🛡️ Quản Trị", order: 2 },
+  utility: { name: "🛠️ Tiện Ích", order: 3 },
+  fun: { name: "🎮 Giải Trí", order: 4 },
+  slash: { name: "💬 Cơ Bản", order: 5 },
+};
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,11 +17,11 @@ module.exports = {
   async execute(interaction) {
     const { client } = interaction;
 
-    // Gom command theo category
+    // Group commands by category
     const categories = {};
 
     client.commands.forEach((cmd) => {
-      const dir = cmd.category || "Khác"; // category lấy từ loader
+      const dir = (cmd.category || "Khác").toLowerCase();
       if (!categories[dir]) categories[dir] = [];
       categories[dir].push({
         name: cmd.data.name,
@@ -20,37 +29,35 @@ module.exports = {
       });
     });
 
-    // Tạo embed
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({ name: "TRUNG TÂM TRỢ GIÚP" })
-      .setTitle("Danh Sách Lệnh Hỗ Trợ")
-      .setDescription(
-        "Dưới đây là các lệnh bạn có thể sử dụng. Gõ `/<lệnh>` để kích hoạt."
-      );
+      .setColor("#5865F2")
+      .setTitle("📖 Danh Sách Lệnh")
+      .setDescription("Sử dụng dấu `/<tên_lệnh>` để gọi lệnh tương ứng.");
 
-    // Thêm field cho từng category
-    for (const [category, commands] of Object.entries(categories)) {
-      const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+    // Sort categories by predefined order
+    const sortedCategories = Object.keys(categories).sort((a, b) => {
+      const orderA = CATEGORY_META[a]?.order || 99;
+      const orderB = CATEGORY_META[b]?.order || 99;
+      return orderA - orderB;
+    });
+
+    for (const cat of sortedCategories) {
+      const label = CATEGORY_META[cat]?.name || (cat.charAt(0).toUpperCase() + cat.slice(1));
+      const commands = categories[cat];
 
       embed.addFields({
-        name: categoryName,
+        name: label,
         value: commands
-          .map((c) => `**\`/${c.name}\`** • *${c.desc}*`)
+          .map((c) => `\`/${c.name}\` - ${c.desc}`)
           .join("\n"),
         inline: false,
       });
     }
 
-
-    embed
-      .setFooter({
-        text: `Yêu cầu bởi ${interaction.user.tag} • Gõ /lệnh để sử dụng`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
-      })
-      .setTimestamp();
+    embed.setFooter({
+      text: `Tổng cộng ${client.commands.size} lệnh • Yêu cầu bởi ${interaction.user.tag}`,
+    });
 
     await interaction.reply({ embeds: [embed], ephemeral: true });
   },
 };
-

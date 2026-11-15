@@ -27,14 +27,14 @@ module.exports = {
 
     if (!member) {
       return interaction.reply({
-        content: "❌ Không tìm thấy thành viên này trong server!",
+        content: "Không tìm thấy thành viên này trong server!",
         ephemeral: true,
       });
     }
 
     if (!member.bannable) {
       return interaction.reply({
-        content: "❌ Không thể ban thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
+        content: "Không thể ban thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
         ephemeral: true,
       });
     }
@@ -42,9 +42,8 @@ module.exports = {
     await member.ban({ reason });
 
     const embed = new EmbedBuilder()
-      .setColor("#ed4245")
-      .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-      .setTitle("Cấm Thành Viên (Ban)")
+      .setColor("#ef4444")
+      .setTitle("🔨 Cấm Thành Viên (Ban)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị cấm", value: `${target} (\`${target.id}\`)`, inline: true },
@@ -53,7 +52,6 @@ module.exports = {
       )
       .setFooter({
         text: `Ban bởi ${interaction.user.tag}`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
       })
       .setTimestamp();
 

@@ -21,7 +21,7 @@ module.exports = {
 
     if (amount < 1 || amount > 100) {
       return interaction.reply({
-        content: "❌ Vui lòng nhập số từ **1 đến 100**.",
+        content: "Vui lòng nhập số từ **1 đến 100**.",
         ephemeral: true,
       });
     }
@@ -30,9 +30,8 @@ module.exports = {
       await interaction.channel.bulkDelete(amount, true);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287")
-        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("Dọn Dẹp Tin Nhắn")
+        .setColor("#10b981")
+        .setTitle("🧹 Dọn Dẹp Tin Nhắn")
         .addFields(
           {
             name: "Số Lượng Đã Xóa",
@@ -50,7 +49,6 @@ module.exports = {
             inline: true,
           }
         )
-
         .setFooter({ text: "Lưu ý: Tin nhắn quá 14 ngày không thể xóa tự động" })
         .setTimestamp();
 
@@ -62,7 +60,7 @@ module.exports = {
       console.error(error);
       await interaction.reply({
         content:
-          "❌ Không thể xóa tin nhắn. Hãy chắc chắn bot có quyền và tin nhắn không quá 14 ngày.",
+          "Không thể xóa tin nhắn. Hãy chắc chắn bot có quyền và tin nhắn không quá 14 ngày.",
         ephemeral: true,
       });
     }

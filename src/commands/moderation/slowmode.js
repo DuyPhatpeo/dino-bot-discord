@@ -30,7 +30,7 @@ module.exports = {
     const botMember = interaction.guild.members.me;
     if (!botMember.permissions.has(PermissionFlagsBits.ManageChannels)) {
       return interaction.reply({
-        content: "❌ Bot không có quyền `Quản lý kênh` (Manage Channels) để thực hiện lệnh này.",
+        content: "Bot không có quyền `Quản lý kênh` (Manage Channels) để thực hiện lệnh này.",
         ephemeral: true,
       });
     }
@@ -39,7 +39,7 @@ module.exports = {
       await channel.setRateLimitPerUser(seconds, `Cài đặt bởi ${interaction.user.tag}`);
 
       const embed = new EmbedBuilder()
-        .setColor(seconds > 0 ? "#fee75c" : "#57f287")
+        .setColor(seconds > 0 ? "#f59e0b" : "#10b981")
         .setTitle("⏱️ Cài Đặt Slowmode")
         .setDescription(
           seconds > 0
@@ -53,7 +53,7 @@ module.exports = {
     } catch (error) {
       console.error("Lỗi khi cài đặt slowmode:", error);
       return interaction.reply({
-        content: "❌ Đã xảy ra lỗi khi cố gắng cài đặt slowmode cho kênh này.",
+        content: "Đã xảy ra lỗi khi cố gắng cài đặt slowmode cho kênh này.",
         ephemeral: true,
       });
     }

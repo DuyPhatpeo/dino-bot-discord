@@ -29,12 +29,8 @@ module.exports = {
     const boostCount = guild.premiumSubscriptionCount || 0;
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({
-        name: "THÔNG TIN MÁY CHỦ",
-        iconURL: guild.iconURL({ dynamic: true }),
-      })
-      .setTitle(guild.name)
+      .setColor("#5865F2")
+      .setTitle(`📊 ${guild.name}`)
       .setThumbnail(guild.iconURL({ dynamic: true, size: 1024 }))
       .addFields(
         {
@@ -54,7 +50,7 @@ module.exports = {
         },
         {
           name: `Thành Viên (${totalMembers})`,
-          value: `👤 Người: **${humanCount > 0 ? humanCount : totalMembers}**\n🤖 Bot: **${botCount}**`,
+          value: `Người: **${humanCount > 0 ? humanCount : totalMembers}**\nBot: **${botCount}**`,
           inline: true,
         },
         {
@@ -73,10 +69,8 @@ module.exports = {
           inline: false,
         }
       )
-
       .setFooter({
         text: `Yêu cầu bởi ${interaction.user.tag}`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       })
       .setTimestamp();
 

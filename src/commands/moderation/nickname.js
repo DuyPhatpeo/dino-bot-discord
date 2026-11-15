@@ -27,7 +27,7 @@ module.exports = {
     // Kiểm tra quyền
     if (!member.manageable) {
       return interaction.reply({
-        content: "❌ Không thể đổi biệt hiệu cho thành viên này!",
+        content: "Không thể đổi biệt hiệu cho thành viên này!",
         ephemeral: true,
       });
     }
@@ -36,9 +36,8 @@ module.exports = {
       await member.setNickname(newNickname);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287")
-        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("Đổi Biệt Hiệu Thành Viên")
+        .setColor("#10b981")
+        .setTitle("🏷️ Đổi Biệt Hiệu Thành Viên")
         .addFields(
           { name: "Thành viên", value: `${target}`, inline: true },
           { name: "Biệt hiệu mới", value: `\`${newNickname}\``, inline: true },
@@ -49,7 +48,7 @@ module.exports = {
       await interaction.reply({ embeds: [embed] });
     } catch (error) {
       return interaction.reply({
-        content: "❌ Đã có lỗi khi đổi biệt hiệu!",
+        content: "Đã có lỗi khi đổi biệt hiệu!",
         ephemeral: true,
       });
     }

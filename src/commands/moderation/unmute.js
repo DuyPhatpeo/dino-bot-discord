@@ -21,14 +21,14 @@ module.exports = {
 
     if (!target) {
       return interaction.reply({
-        content: "❌ Không tìm thấy thành viên này trong server.",
+        content: "Không tìm thấy thành viên này trong server.",
         ephemeral: true,
       });
     }
 
     if (!target.isCommunicationDisabled()) {
       return interaction.reply({
-        content: "❌ Thành viên này hiện không bị tắt tiếng.",
+        content: "Thành viên này hiện không bị tắt tiếng.",
         ephemeral: true,
       });
     }
@@ -37,9 +37,8 @@ module.exports = {
       await target.timeout(null);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287")
-        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("Gỡ Tắt Tiếng Thành Viên")
+        .setColor("#10b981")
+        .setTitle("🔊 Gỡ Tắt Tiếng Thành Viên")
         .setThumbnail(target.user.displayAvatarURL({ dynamic: true, size: 512 }))
         .addFields(
           {
@@ -55,7 +54,6 @@ module.exports = {
         )
         .setFooter({
           text: `Thực hiện bởi ${interaction.user.tag}`,
-          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
         })
         .setTimestamp();
 
@@ -63,7 +61,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: "❌ Không thể gỡ mute. Hãy kiểm tra quyền của bot.",
+        content: "Không thể gỡ mute. Hãy kiểm tra quyền của bot.",
         ephemeral: true,
       });
     }

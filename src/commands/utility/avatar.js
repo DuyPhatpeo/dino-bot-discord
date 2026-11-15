@@ -16,14 +16,11 @@ module.exports = {
     const avatarURL = user.displayAvatarURL({ dynamic: true, size: 1024 });
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({ name: "TIỆN ÍCH" })
-      .setTitle(`Ảnh Đại Diện: ${user.username}`)
+      .setColor("#5865F2")
+      .setTitle(`🖼️ Ảnh đại diện: ${user.username}`)
       .setURL(avatarURL)
       .setImage(avatarURL)
-      .setDescription(`[Tải xuống ảnh chất lượng cao](${avatarURL})`)
-      .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
-      .setTimestamp();
+      .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}` });
 
     await interaction.reply({ embeds: [embed] });
   },

@@ -28,18 +28,17 @@ module.exports = {
     const duration = interaction.options.getInteger("duration");
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({ name: "MINI GAMES" })
-      .setTitle("Giveaway Máy Chủ")
+      .setColor("#8b5cf6")
+      .setTitle("🎁 Giveaway Máy Chủ")
       .addFields(
         {
           name: "Phần Thưởng",
-          value: `🎁 **${prize}**`,
+          value: `**${prize}**`,
           inline: true,
         },
         {
           name: "Thời Gian",
-          value: `⏳ **${duration} giây**`,
+          value: `**${duration} giây**`,
           inline: true,
         },
         {
@@ -55,7 +54,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("giveaway_join")
         .setLabel("Tham gia")
-        .setStyle(ButtonStyle.Success),
+        .setStyle(ButtonStyle.Secondary),
       new ButtonBuilder()
         .setCustomId("giveaway_list")
         .setLabel("Danh sách")
@@ -122,18 +121,17 @@ module.exports = {
       }
 
       const resultEmbed = new EmbedBuilder()
-        .setColor(winner ? "#57f287" : "#ed4245")
-        .setAuthor({ name: "MINI GAMES" })
-        .setTitle("Kết Quả Giveaway")
+        .setColor(winner ? "#10b981" : "#ef4444")
+        .setTitle("🎁 Kết Quả Giveaway")
         .addFields(
           {
             name: "Phần Thưởng",
-            value: `🎁 **${prize}**`,
+            value: `**${prize}**`,
             inline: true,
           },
           {
             name: "Người May Mắn",
-            value: winner ? `🏆 ${winner}` : "Không có ai tham gia",
+            value: winner ? `${winner}` : "Không có ai tham gia",
             inline: true,
           }
         )
@@ -143,7 +141,7 @@ module.exports = {
       // Gửi thông báo MỚI vào kênh
       await interaction.channel.send({
         content: winner
-          ? `🎉 Chúc mừng ${winner} đã may mắn trúng giải thưởng **${prize}**!`
+          ? `Chúc mừng ${winner} đã may mắn trúng giải thưởng **${prize}**!`
           : undefined,
         embeds: [resultEmbed],
       });

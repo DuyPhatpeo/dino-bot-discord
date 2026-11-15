@@ -27,14 +27,14 @@ module.exports = {
 
     if (!member) {
       return interaction.reply({
-        content: "❌ Không tìm thấy thành viên này trong server!",
+        content: "Không tìm thấy thành viên này trong server!",
         ephemeral: true,
       });
     }
 
     if (!member.kickable) {
       return interaction.reply({
-        content: "❌ Không thể kick thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
+        content: "Không thể kick thành viên này! (Họ có thể có quyền cao hơn tôi hoặc là Chủ Sở Hữu)",
         ephemeral: true,
       });
     }
@@ -42,9 +42,8 @@ module.exports = {
     await member.kick(reason);
 
     const embed = new EmbedBuilder()
-      .setColor("#fee75c")
-      .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-      .setTitle("Đuổi Thành Viên (Kick)")
+      .setColor("#f59e0b")
+      .setTitle("👢 Đuổi Thành Viên (Kick)")
       .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
       .addFields(
         { name: "Người bị đuổi", value: `${target} (\`${target.id}\`)`, inline: true },
@@ -53,7 +52,6 @@ module.exports = {
       )
       .setFooter({
         text: `Kick bởi ${interaction.user.tag}`,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
       })
       .setTimestamp();
 

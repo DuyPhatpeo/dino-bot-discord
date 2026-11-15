@@ -29,7 +29,7 @@ module.exports = {
     if (disable) {
       setGuildConfig(interaction.guildId, { tempVoiceChannelId: null });
       return interaction.reply({
-        content: "✅ Đã tắt tính năng tự động tạo phòng Voice tạm thời.",
+        content: "Đã tắt tính năng tự động tạo phòng Voice tạm thời.",
         ephemeral: true,
       });
     }
@@ -41,7 +41,7 @@ module.exports = {
         : "*Chưa được thiết lập*";
 
       return interaction.reply({
-        content: `📌 Kênh kích hoạt Voice tạm thời hiện tại: ${currentCh}\n💡 Chạy \`/settempvoice channel:#TenKenh\` để cài đặt hoặc \`/settempvoice disable:True\` để tắt.`,
+        content: `Kênh kích hoạt Voice tạm thời hiện tại: ${currentCh}\nChạy \`/settempvoice channel:#TenKenh\` để cài đặt hoặc \`/settempvoice disable:True\` để tắt.`,
         ephemeral: true,
       });
     }
@@ -49,10 +49,10 @@ module.exports = {
     setGuildConfig(interaction.guildId, { tempVoiceChannelId: channel.id });
 
     const embed = new EmbedBuilder()
-      .setColor("#57f287")
-      .setTitle("Cấu Hình Kênh Voice Tạm Thời")
+      .setColor("#5865F2")
+      .setTitle("🎙️ Cấu Hình Kênh Voice Tạm Thời")
       .setDescription(
-        `✅ Đã thiết lập kênh ${channel} làm kênh **Kích hoạt tạo phòng Voice**.\n\n` +
+        `Đã thiết lập kênh ${channel} làm kênh **Kích hoạt tạo phòng Voice**.\n\n` +
         `Khi bất kỳ thành viên nào tham gia kênh này, DinoBot sẽ tự động tạo một phòng Voice riêng và tự xóa phòng khi không còn ai.`
       )
       .setFooter({ text: `Cài đặt bởi ${interaction.user.tag}` })

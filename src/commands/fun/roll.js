@@ -28,9 +28,8 @@ function createDiceEmbed(user, count, sides, rolls) {
     .join("\n");
 
   const embed = new EmbedBuilder()
-    .setColor("#2ec99d")
-    .setAuthor({ name: "MINI GAMES" })
-    .setTitle("Tung Xúc Xắc")
+    .setColor("#8b5cf6")
+    .setTitle("🎲 Tung Xúc Xắc")
     .addFields(
       {
         name: "Thông Số",
@@ -39,7 +38,7 @@ function createDiceEmbed(user, count, sides, rolls) {
       },
       {
         name: count > 1 ? "Tổng Điểm" : "Kết Quả",
-        value: count > 1 ? `🎯 **${total}** điểm` : rollDetails,
+        value: count > 1 ? `**${total}** điểm` : rollDetails,
         inline: true,
       }
     );
@@ -95,9 +94,8 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(`dice_reroll_${count}_${sides}`)
-        .setEmoji("🎲")
         .setLabel("Đổ lại")
-        .setStyle(ButtonStyle.Primary)
+        .setStyle(ButtonStyle.Secondary)
     );
 
     await interaction.reply({

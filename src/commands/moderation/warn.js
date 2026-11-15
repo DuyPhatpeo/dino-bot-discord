@@ -29,13 +29,13 @@ module.exports = {
     // Không cho cảnh báo chính mình hoặc bot
     if (target.id === interaction.user.id) {
       return interaction.reply({
-        content: "❌ Bạn không thể tự cảnh báo chính mình.",
+        content: "Bạn không thể tự cảnh báo chính mình.",
         ephemeral: true,
       });
     }
     if (target.bot) {
       return interaction.reply({
-        content: "❌ Bạn không thể cảnh báo bot.",
+        content: "Bạn không thể cảnh báo bot.",
         ephemeral: true,
       });
     }
@@ -44,16 +44,15 @@ module.exports = {
       // Gửi DM cho user bị cảnh báo
       await target
         .send(
-          `⚠️ Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
+          `Bạn đã bị cảnh báo trong server **${interaction.guild.name}**.\n**Lý do:** ${reason}`
         )
         .catch(() => {
           console.log("Không thể gửi DM cho user này.");
         });
 
       const embed = new EmbedBuilder()
-        .setColor("#fee75c")
-        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("Cảnh Báo Thành Viên")
+        .setColor("#f59e0b")
+        .setTitle("⚠️ Cảnh Báo Thành Viên")
         .setThumbnail(target.displayAvatarURL({ dynamic: true, size: 512 }))
         .addFields(
           {
@@ -72,10 +71,8 @@ module.exports = {
             inline: false,
           }
         )
-
         .setFooter({
           text: `Thực hiện bởi ${interaction.user.tag}`,
-          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
         })
         .setTimestamp();
 
@@ -83,7 +80,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: "❌ Có lỗi xảy ra khi cảnh báo user.",
+        content: "Có lỗi xảy ra khi cảnh báo user.",
         ephemeral: true,
       });
     }

@@ -17,7 +17,7 @@ module.exports = {
 
     if (min >= max) {
       return interaction.reply({
-        content: "❌ Giá trị **min** phải nhỏ hơn **max**.",
+        content: "Giá trị **min** phải nhỏ hơn **max**.",
         ephemeral: true,
       });
     }
@@ -25,23 +25,10 @@ module.exports = {
     const result = Math.floor(Math.random() * (max - min + 1)) + min;
 
     const embed = new EmbedBuilder()
-      .setColor("#2ec99d")
-      .setAuthor({ name: "TIỆN ÍCH" })
-      .setTitle("Quay Số Ngẫu Nhiên")
-      .addFields(
-        {
-          name: "Phạm Vi",
-          value: `${min} → ${max}`,
-          inline: true,
-        },
-        {
-          name: "Kết Quả",
-          value: `🎯 **${result}**`,
-          inline: true,
-        }
-      )
-      .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}` })
-      .setTimestamp();
+      .setColor("#8b5cf6")
+      .setTitle("🔢 Quay Số Ngẫu Nhiên")
+      .setDescription(`Phạm vi: **${min} → ${max}**\nKết quả: **${result}**`)
+      .setFooter({ text: `Yêu cầu bởi ${interaction.user.tag}` });
 
 
     await interaction.reply({ embeds: [embed] });

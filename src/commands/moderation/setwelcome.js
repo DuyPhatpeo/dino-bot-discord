@@ -29,7 +29,7 @@ module.exports = {
     if (disable) {
       setGuildConfig(interaction.guildId, { welcomeChannelId: null });
       return interaction.reply({
-        content: "✅ Đã tắt tính năng gửi tin nhắn chào mừng thành viên mới.",
+        content: "Đã tắt tính năng gửi tin nhắn chào mừng thành viên mới.",
         ephemeral: true,
       });
     }
@@ -41,7 +41,7 @@ module.exports = {
         : "*Chưa được thiết lập*";
 
       return interaction.reply({
-        content: `📌 Kênh chào mừng hiện tại: ${currentChannel}\n💡 Để đổi kênh, hãy chạy \`/setwelcome channel:#ten-kenh\` hoặc \`/setwelcome disable:True\` để tắt.`,
+        content: `Kênh chào mừng hiện tại: ${currentChannel}\nĐể đổi kênh, hãy chạy \`/setwelcome channel:#ten-kenh\` hoặc \`/setwelcome disable:True\` để tắt.`,
         ephemeral: true,
       });
     }
@@ -49,9 +49,9 @@ module.exports = {
     setGuildConfig(interaction.guildId, { welcomeChannelId: channel.id });
 
     const embed = new EmbedBuilder()
-      .setColor("#57f287")
-      .setTitle("Cấu Hình Kênh Chào Mừng")
-      .setDescription(`✅ Đã thiết lập kênh chào mừng thành viên mới là ${channel}.`)
+      .setColor("#5865F2")
+      .setTitle("👋 Cấu Hình Kênh Chào Mừng")
+      .setDescription(`Đã thiết lập kênh chào mừng thành viên mới là ${channel}.`)
       .setFooter({ text: `Cài đặt bởi ${interaction.user.tag}` })
       .setTimestamp();
 

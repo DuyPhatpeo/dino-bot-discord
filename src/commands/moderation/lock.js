@@ -29,7 +29,7 @@ module.exports = {
     const botMember = interaction.guild.members.me;
     if (!botMember.permissions.has(PermissionFlagsBits.ManageChannels)) {
       return interaction.reply({
-        content: "❌ Bot không có quyền `Quản lý kênh` (Manage Channels) để thực hiện lệnh này.",
+        content: "Bot không có quyền `Quản lý kênh` (Manage Channels) để thực hiện lệnh này.",
         ephemeral: true,
       });
     }
@@ -40,7 +40,7 @@ module.exports = {
       }, { reason: `Khóa bởi ${interaction.user.tag}: ${reason}` });
 
       const embed = new EmbedBuilder()
-        .setColor("#ed4245")
+        .setColor("#ef4444")
         .setTitle("🔒 Kênh Đã Bị Khóa")
         .setDescription(`Kênh ${channel} đã bị khóa bởi ${interaction.user}. Thành viên tạm thời không thể gửi tin nhắn.`)
         .addFields(
@@ -51,7 +51,7 @@ module.exports = {
       if (channel.id !== interaction.channelId) {
         await channel.send({ embeds: [embed] });
         return interaction.reply({
-          content: `✅ Đã khóa thành công kênh ${channel}.`,
+          content: `Đã khóa thành công kênh ${channel}.`,
           ephemeral: true,
         });
       } else {
@@ -60,7 +60,7 @@ module.exports = {
     } catch (error) {
       console.error("Lỗi khi lock channel:", error);
       return interaction.reply({
-        content: "❌ Đã xảy ra lỗi khi cố gắng khóa kênh này.",
+        content: "Đã xảy ra lỗi khi cố gắng khóa kênh này.",
         ephemeral: true,
       });
     }

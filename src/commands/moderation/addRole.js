@@ -27,7 +27,7 @@ module.exports = {
       )
     ) {
       return interaction.reply({
-        content: "❌ Bot không có quyền quản lý role!",
+        content: "Bot không có quyền quản lý role!",
         ephemeral: true,
       });
     }
@@ -36,7 +36,7 @@ module.exports = {
     if (role.position >= interaction.guild.members.me.roles.highest.position) {
       return interaction.reply({
         content:
-          "❌ Không thể cấp role này vì role của bot thấp hơn hoặc bằng role cần cấp!",
+          "Không thể cấp role này vì role của bot thấp hơn hoặc bằng role cần cấp!",
         ephemeral: true,
       });
     }
@@ -51,7 +51,7 @@ module.exports = {
     ) {
       return interaction.reply({
         content:
-          "❌ Không thể cấp role này cho thành viên vì role cao hơn hoặc bằng role hiện tại của họ!",
+          "Không thể cấp role này cho thành viên vì role cao hơn hoặc bằng role hiện tại của họ!",
         ephemeral: true,
       });
     }
@@ -60,9 +60,8 @@ module.exports = {
       await target.roles.add(role);
 
       const embed = new EmbedBuilder()
-        .setColor("#57f287")
-        .setAuthor({ name: "QUẢN TRỊ VIÊN" })
-        .setTitle("Cấp Vai Trò Thành Viên")
+        .setColor("#10b981")
+        .setTitle("🛡️ Cấp Vai Trò Thành Viên")
         .addFields(
           { name: "Thành viên", value: `${target}`, inline: true },
           { name: "Vai trò", value: `${role}`, inline: true },
@@ -74,7 +73,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       return interaction.reply({
-        content: "❌ Có lỗi xảy ra khi cấp role!",
+        content: "Có lỗi xảy ra khi cấp role!",
         ephemeral: true,
       });
     }

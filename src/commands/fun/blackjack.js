@@ -39,7 +39,7 @@ function getScore(hand) {
 }
 
 /** Tạo embed giao diện sạch, loại bỏ icon thừa */
-function renderEmbed(user, playerHand, dealerHand, hideDealer, message, color = "#2ec99d") {
+function renderEmbed(user, playerHand, dealerHand, hideDealer, message) {
   const pScore = getScore(playerHand);
   const pCards = playerHand.map((c) => c.display).join(" ");
   const dCards = hideDealer
@@ -48,8 +48,8 @@ function renderEmbed(user, playerHand, dealerHand, hideDealer, message, color = 
   const dScore = hideDealer ? "?" : `**${getScore(dealerHand)}**`;
 
   return new EmbedBuilder()
-    .setColor(color)
-    .setTitle("Xì Dách (Blackjack)")
+    .setColor("#8b5cf6")
+    .setTitle("🃏 Xì Dách (Blackjack)")
     .setDescription(
       `**DinoBot**: ${dCards} • Điểm: ${dScore}\n` +
       `**${user.username}**: ${pCards} • Điểm: **${pScore}**\n\n` +
@@ -96,7 +96,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("bj_hit")
         .setLabel("Rút bài")
-        .setStyle(ButtonStyle.Success),
+        .setStyle(ButtonStyle.Secondary),
       new ButtonBuilder()
         .setCustomId("bj_stand")
         .setLabel("Dằn")
