@@ -48,7 +48,7 @@ module.exports = {
         // Added Playlist with clean link and single-line metadata
         const embed = new EmbedBuilder()
           .setColor("#2ec99d")
-          .setTitle("🎵 Added Playlist")
+          .setTitle("Added Playlist")
           .setDescription(
             `[**${playlist.title}**](${playlist.url})\nThời lượng: **${playlist.totalDuration}** • Số bài hát: **${playlist.tracks.length} bài**`
           );
@@ -65,7 +65,7 @@ module.exports = {
       // Added Track with clean link and single-line metadata
       const embed = new EmbedBuilder()
         .setColor("#2ec99d")
-        .setTitle("🎵 Added Track")
+        .setTitle("Added Track")
         .setDescription(
           `[**${track.title}**](${track.url})\nThời lượng: **${track.duration}** • Vị trí: **${isAlreadyPlaying ? `#${queuePosition}` : "Đang phát ngay"}**`
         );

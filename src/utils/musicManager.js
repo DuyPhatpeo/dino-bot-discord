@@ -272,53 +272,253 @@ async function fetchStandardPlaylist(playlistId, requester) {
 }
 
 /**
- * Resolve single track from YouTube URL, search term, or direct audio link
+ * Resolve Spotify track, album, or playlist URL
+ * @param {string} url 
+ * @param {import("discord.js").User} requester 
+ * @returns {Promise<{ isPlaylist: boolean, playlist?: object, track?: object }|null>}
+ */
+async function resolveSpotify(url, requester) {
+  try {
+    const urlObj = new URL(url);
+    const parts = urlObj.pathname.split("/").filter(Boolean);
+    const typeIdx = parts.findIndex((p) => ["track", "playlist", "album"].includes(p));
+    if (typeIdx === -1) return null;
+
+    const type = parts[typeIdx];
+    const id = parts[typeIdx + 1];
+    if (!id) return null;
+
+    const embedUrl = `https://open.spotify.com/embed/${type}/${id}`;
+    const res = await fetch(embedUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const m = html.match(/<script id="__NEXT_DATA__"[^>]*>(.*?)<\/script>/);
+    if (!m) return null;
+
+    const data = JSON.parse(m[1]);
+    const entity = data.props?.pageProps?.state?.data?.entity;
+    if (!entity) return null;
+
+    if (type === "track") {
+      const title = entity.title || entity.name;
+      const artist = entity.artists?.map((a) => a.name).join(", ") || "";
+      const durSec = Math.floor((entity.duration || 0) / 1000);
+      const fullTitle = `${title}${artist ? " - " + artist : ""}`;
+
+      return {
+        isPlaylist: false,
+        track: {
+          title: fullTitle,
+          searchKeyword: `${title} ${artist}`.trim(),
+          url: `https://open.spotify.com/track/${id}`,
+          duration: formatDuration(durSec),
+          rawDuration: durSec,
+          thumbnail: entity.visualIdentity?.image?.[0]?.url || null,
+          requester,
+          type: "lazy_search",
+        },
+      };
+    }
+
+    if (type === "playlist" || type === "album") {
+      const playlistTitle = entity.name || entity.title || (type === "album" ? "Spotify Album" : "Spotify Playlist");
+      const trackList = entity.trackList || [];
+      let totalSec = 0;
+
+      const tracks = trackList.map((t) => {
+        const durSec = Math.floor((t.duration || 0) / 1000);
+        totalSec += durSec;
+        const tTitle = t.title || t.name;
+        const tArtist = t.subtitle || "";
+        const fullTitle = `${tTitle}${tArtist ? " - " + tArtist : ""}`;
+
+        return {
+          title: fullTitle,
+          searchKeyword: `${tTitle} ${tArtist}`.trim(),
+          url: t.uri?.startsWith("spotify:track:")
+            ? `https://open.spotify.com/track/${t.uri.replace("spotify:track:", "")}`
+            : url,
+          duration: formatDuration(durSec),
+          rawDuration: durSec,
+          thumbnail: null,
+          requester,
+          type: "lazy_search",
+        };
+      });
+
+      if (tracks.length === 0) return null;
+
+      return {
+        isPlaylist: true,
+        playlist: {
+          title: playlistTitle,
+          url: `https://open.spotify.com/${type}/${id}`,
+          tracks,
+          totalDuration: formatDuration(totalSec),
+        },
+      };
+    }
+
+    return null;
+  } catch (err) {
+    console.error("[Music] Error resolving Spotify URL:", err);
+    return null;
+  }
+}
+
+/**
+ * Resolve SoundCloud track URL via oEmbed
+ * @param {string} url 
+ * @param {import("discord.js").User} requester 
+ * @returns {Promise<{ isPlaylist: boolean, track: object }|null>}
+ */
+async function resolveSoundCloud(url, requester) {
+  try {
+    const oembedUrl = `https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+    const res = await fetch(oembedUrl, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data.title) return null;
+
+    return {
+      isPlaylist: false,
+      track: {
+        title: data.title,
+        searchKeyword: data.title,
+        url,
+        duration: "Stream",
+        rawDuration: 0,
+        thumbnail: data.thumbnail_url || null,
+        requester,
+        type: "lazy_search",
+      },
+    };
+  } catch (err) {
+    console.error("[Music] Error resolving SoundCloud URL:", err);
+    return null;
+  }
+}
+
+/**
+ * Resolve music track from web page via OpenGraph meta (Zing MP3, Apple Music, etc.)
+ * @param {string} url 
+ * @param {import("discord.js").User} requester 
+ * @returns {Promise<{ isPlaylist: boolean, track: object }|null>}
+ */
+async function resolveWebMusic(url, requester) {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+
+    let title = null;
+    const ogMatch =
+      html.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:title["']/i);
+    if (ogMatch) {
+      title = ogMatch[1];
+    } else {
+      const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+      if (titleMatch) title = titleMatch[1];
+    }
+
+    if (!title) return null;
+
+    title = title
+      .replace(/ - Zing MP3/i, "")
+      .replace(/ \| NhacCuaTui/i, "")
+      .replace(/ on Apple Music/i, "")
+      .replace(/ \| Spotify/i, "")
+      .trim();
+
+    return {
+      isPlaylist: false,
+      track: {
+        title,
+        searchKeyword: title,
+        url,
+        duration: "Stream",
+        rawDuration: 0,
+        thumbnail: null,
+        requester,
+        type: "lazy_search",
+      },
+    };
+  } catch (err) {
+    return null;
+  }
+}
+
+/**
+ * Resolve single track from YouTube URL, music app link, direct audio, or search term
  * @param {string} query 
  * @param {import("discord.js").User} requester 
  * @returns {Promise<object>}
  */
 async function resolveTrack(query, requester) {
   const trimmed = query.trim();
-  const videoId = parseVideoId(trimmed);
 
-  // Case 1: Valid YouTube video URL or ID
-  if (videoId) {
-    const info = await ytdl.getInfo(trimmed);
-    return {
-      title: info.videoDetails.title,
-      url: info.videoDetails.video_url || `https://www.youtube.com/watch?v=${videoId}`,
-      duration: formatDuration(info.videoDetails.lengthSeconds),
-      rawDuration: Number(info.videoDetails.lengthSeconds) || 0,
-      thumbnail: info.videoDetails.thumbnails?.[0]?.url || null,
-      requester,
-      type: "youtube",
-    };
-  }
-
-  // Case 2: Direct HTTP/HTTPS audio URL
+  // If query is a URL
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
-    let title = "Audio Stream";
-    try {
-      const urlObj = new URL(trimmed);
-      const filename = urlObj.pathname.split("/").pop();
-      if (filename && filename.length > 0) {
-        title = decodeURIComponent(filename);
-      }
-    } catch {
-      // Use fallback title
+    const videoId = parseVideoId(trimmed);
+
+    // Case 1: Valid YouTube video URL or ID
+    if (videoId) {
+      const info = await ytdl.getInfo(trimmed);
+      return {
+        title: info.videoDetails.title,
+        url: info.videoDetails.video_url || `https://www.youtube.com/watch?v=${videoId}`,
+        duration: formatDuration(info.videoDetails.lengthSeconds),
+        rawDuration: Number(info.videoDetails.lengthSeconds) || 0,
+        thumbnail: info.videoDetails.thumbnails?.[0]?.url || null,
+        requester,
+        type: "youtube",
+      };
     }
-    return {
-      title,
-      url: trimmed,
-      duration: "Stream",
-      rawDuration: 0,
-      thumbnail: null,
-      requester,
-      type: "direct",
-    };
+
+    // Case 2: Direct HTTP/HTTPS audio file (.mp3, .wav, .ogg, .flac, .aac, .m4a, .opus)
+    const audioExts = [".mp3", ".wav", ".ogg", ".flac", ".aac", ".m4a", ".opus"];
+    const isDirectAudio = audioExts.some((ext) => trimmed.toLowerCase().includes(ext));
+    if (isDirectAudio) {
+      let title = "Audio Stream";
+      try {
+        const urlObj = new URL(trimmed);
+        const filename = urlObj.pathname.split("/").pop();
+        if (filename && filename.length > 0) {
+          title = decodeURIComponent(filename);
+        }
+      } catch {}
+      return {
+        title,
+        url: trimmed,
+        duration: "Stream",
+        rawDuration: 0,
+        thumbnail: null,
+        requester,
+        type: "direct",
+      };
+    }
+
+    // Case 3: Music website link (Zing MP3, Apple Music, Nhaccuatui, etc.)
+    const webResult = await resolveWebMusic(trimmed, requester);
+    if (webResult && webResult.track) {
+      return webResult.track;
+    }
   }
 
-  // Case 3: YouTube search query
+  // Case 4: YouTube search query
   const searchResults = await ytdl.search(trimmed);
   if (!searchResults || searchResults.length === 0) {
     throw new Error(`Không tìm thấy bài hát nào trên YouTube với từ khóa: "${trimmed}"`);
@@ -336,7 +536,7 @@ async function resolveTrack(query, requester) {
 }
 
 /**
- * Resolve user query to either a Playlist (Mix/Standard) or a Single Track
+ * Resolve user query to either a Playlist (Spotify/YouTube/Mix) or a Single Track
  * @param {string} query 
  * @param {import("discord.js").User} requester 
  * @returns {Promise<{ isPlaylist: boolean, playlist?: object, track?: object }>}
@@ -344,7 +544,19 @@ async function resolveTrack(query, requester) {
 async function resolveInput(query, requester) {
   const trimmed = query.trim();
 
-  // Check if query is a URL with playlist or mix parameters
+  // 1. Check Spotify URL
+  if (trimmed.includes("spotify.com/")) {
+    const spotifyResult = await resolveSpotify(trimmed, requester);
+    if (spotifyResult) return spotifyResult;
+  }
+
+  // 2. Check SoundCloud URL
+  if (trimmed.includes("soundcloud.com/")) {
+    const scResult = await resolveSoundCloud(trimmed, requester);
+    if (scResult) return scResult;
+  }
+
+  // 3. Check YouTube URL with playlist or mix parameters
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
     try {
       const urlObj = new URL(trimmed);
@@ -371,7 +583,7 @@ async function resolveInput(query, requester) {
     }
   }
 
-  // Check if query is a bare playlist ID or pure playlist URL
+  // 4. Check if query is a bare playlist ID or pure playlist URL
   const directPlaylistId = parsePlaylistId(trimmed);
   if (directPlaylistId) {
     const pl = await fetchStandardPlaylist(directPlaylistId, requester);
@@ -380,7 +592,7 @@ async function resolveInput(query, requester) {
     }
   }
 
-  // Fallback to single track resolution
+  // 5. Fallback to single track resolution
   const singleTrack = await resolveTrack(trimmed, requester);
   return { isPlaylist: false, track: singleTrack };
 }
@@ -391,6 +603,29 @@ async function resolveInput(query, requester) {
  * @returns {Promise<import("@discordjs/voice").AudioResource>}
  */
 async function createTrackResource(track) {
+  // If track was resolved from a music app (Spotify, SoundCloud, Zing MP3)
+  if (track.type === "lazy_search") {
+    const query = track.searchKeyword || track.title;
+    const searchResults = await ytdl.search(query);
+    if (!searchResults || searchResults.length === 0) {
+      throw new Error(`Không tìm thấy bài hát nào trên YouTube cho: "${query}"`);
+    }
+    const ytTrack = searchResults[0];
+    track.url = ytTrack.url;
+    track.title = ytTrack.title;
+    track.duration = formatDuration(ytTrack.lengthSeconds);
+    track.rawDuration = Number(ytTrack.lengthSeconds) || 0;
+    track.thumbnail = ytTrack.thumbnails?.[0]?.url || track.thumbnail;
+    track.type = "youtube";
+
+    const stream = await ytdl.download(track.url, {
+      filter: { hasAudio: true, hasVideo: false },
+      quality: "highestaudio",
+      highWaterMark: 1 << 25,
+    });
+    return createAudioResource(stream);
+  }
+
   if (track.type === "youtube") {
     const stream = await ytdl.download(track.url, {
       filter: { hasAudio: true, hasVideo: false },
@@ -399,6 +634,7 @@ async function createTrackResource(track) {
     });
     return createAudioResource(stream);
   }
+
   // Direct HTTP/HTTPS audio stream
   return createAudioResource(track.url);
 }
