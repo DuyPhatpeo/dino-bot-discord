@@ -605,11 +605,18 @@ async function resolveInput(query, requester) {
 async function createTrackResource(track) {
   // If track was resolved from a music app (Spotify, SoundCloud, Zing MP3)
   if (track.type === "lazy_search") {
-    const query = track.searchKeyword || track.title;
-    const searchResults = await ytdl.search(query);
+    const rawQuery = track.searchKeyword || track.title;
+    const cleanQuery = rawQuery.replace(/[\u00A0\u1680\u180E\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, " ").trim();
+    console.log(`[Music] Searching YouTube for lazy track: "${cleanQuery}"`);
+
+    let searchResults = await ytdl.search(cleanQuery);
     if (!searchResults || searchResults.length === 0) {
-      throw new Error(`Không tìm thấy bài hát nào trên YouTube cho: "${query}"`);
+      searchResults = await ytdl.search(track.title);
     }
+    if (!searchResults || searchResults.length === 0) {
+      throw new Error(`Không tìm thấy bài hát nào trên YouTube cho: "${cleanQuery}"`);
+    }
+
     const ytTrack = searchResults[0];
     track.url = ytTrack.url;
     track.title = ytTrack.title;
@@ -622,6 +629,7 @@ async function createTrackResource(track) {
       filter: { hasAudio: true, hasVideo: false },
       quality: "highestaudio",
       highWaterMark: 1 << 25,
+      dlChunkSize: 0,
     });
     return createAudioResource(stream);
   }
@@ -631,6 +639,7 @@ async function createTrackResource(track) {
       filter: { hasAudio: true, hasVideo: false },
       quality: "highestaudio",
       highWaterMark: 1 << 25,
+      dlChunkSize: 0,
     });
     return createAudioResource(stream);
   }
@@ -664,9 +673,14 @@ class MusicQueue {
       channelId: this.voiceChannel.id,
       guildId: this.guildId,
       adapterCreator: this.voiceChannel.guild.voiceAdapterCreator,
+      selfDeaf: true,
     });
 
     this.connection.subscribe(this.player);
+
+    this.connection.on("stateChange", (oldState, newState) => {
+      console.log(`[Music] Voice connection (${this.guildId}): ${oldState.status} -> ${newState.status}`);
+    });
 
     this.connection.on(VoiceConnectionStatus.Disconnected, async () => {
       try {
@@ -692,7 +706,12 @@ class MusicQueue {
   }
 
   setupPlayer() {
+    this.player.on("stateChange", (oldState, newState) => {
+      console.log(`[Music] Player (${this.guildId}): ${oldState.status} -> ${newState.status}`);
+    });
+
     this.player.on(AudioPlayerStatus.Idle, () => {
+      console.log(`[Music] Track ended: ${this.currentTrack?.title || "Unknown"}`);
       if (this.currentTrack && !this.isGoingBack) {
         this.previousTracks.push(this.currentTrack);
         if (this.previousTracks.length > 50) {
@@ -747,6 +766,13 @@ class MusicQueue {
     this.currentTrack = track;
 
     try {
+      // Ensure voice connection is ready before streaming
+      if (this.connection.state.status !== VoiceConnectionStatus.Ready) {
+        console.log(`[Music] Waiting for voice connection Ready state (current: ${this.connection.state.status})...`);
+        await entersState(this.connection, VoiceConnectionStatus.Ready, 15_000);
+        console.log(`[Music] Voice connection is Ready!`);
+      }
+
       const resource = await createTrackResource(track);
       this.player.play(resource);
 
@@ -773,14 +799,14 @@ class MusicQueue {
 
   enqueue(track) {
     this.tracks.push(track);
-    if (!this.currentTrack && this.player.state.status === AudioPlayerStatus.Idle) {
+    if (!this.currentTrack) {
       this.playNext();
     }
   }
 
   enqueueMany(tracks) {
     this.tracks.push(...tracks);
-    if (!this.currentTrack && this.player.state.status === AudioPlayerStatus.Idle) {
+    if (!this.currentTrack) {
       this.playNext();
     }
   }
@@ -936,11 +962,25 @@ function getQueue(guildId) {
  */
 function getOrCreateQueue(guildId, voiceChannel, textChannel) {
   let queue = musicQueues.get(guildId);
-  if (!queue || queue.connection.state.status === VoiceConnectionStatus.Destroyed) {
+  if (
+    !queue ||
+    !queue.connection ||
+    queue.connection.state.status === VoiceConnectionStatus.Destroyed ||
+    queue.connection.state.status === VoiceConnectionStatus.Disconnected
+  ) {
+    if (queue) queue.destroy();
     queue = new MusicQueue(guildId, voiceChannel, textChannel);
     musicQueues.set(guildId, queue);
-  } else if (textChannel) {
-    queue.textChannel = textChannel;
+  } else {
+    // If user is in a different voice channel, move the bot to that channel
+    if (queue.voiceChannel.id !== voiceChannel.id) {
+      queue.voiceChannel = voiceChannel;
+      queue.connection.destroy();
+      queue.setupConnection();
+    }
+    if (textChannel) {
+      queue.textChannel = textChannel;
+    }
   }
   return queue;
 }
