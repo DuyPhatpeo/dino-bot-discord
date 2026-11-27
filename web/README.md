@@ -1,12 +1,32 @@
-# React + Vite
+# 🌐 DinoBot Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website Landing Page và trang tra cứu tương tác chính thức của **DinoBot Discord**.
 
-Currently, two official plugins are available:
+## 🚀 Công Nghệ Sử Dụng
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **React 19**
+* **Vite 6**
+* **Tailwind CSS v4**
+* **Framer Motion 12**
+* **Lucide React**
+* **React Router v7**
 
-## Expanding the ESLint configuration
+## 📦 Chạy Cục Bộ
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Cài đặt thư viện (nếu chưa cài ở root monorepo)
+npm install
+
+# Chạy server phát triển (Development)
+npm run dev
+
+# Build production
+npm run build
+
+# Xem thử bản build (Preview)
+npm run preview
+```
+
+## 🌐 Triển Khai
+
+Website được cấu hình tối ưu để triển khai trực tiếp lên **Vercel** với Root Directory là `web`.

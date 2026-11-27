@@ -1,74 +1,113 @@
-# 🦖 DinoBot Discord
+# 🦖 DinoBot Discord & Web
 
 <div align="center">
 
+![Version](https://img.shields.io/badge/version-v1.0.0-10b981?style=for-the-badge)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14.21.0-5865F2?style=for-the-badge&logo=discord&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-5.x-000000?style=for-the-badge&logo=express&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Website](https://img.shields.io/badge/Website-dinobotvn.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)
 
-**DinoBot** là một Discord Bot đa năng được xây dựng bằng **Node.js** và **Discord.js v14**, hỗ trợ quản lý server (Moderation), giải trí (Fun), tiện ích (Utility) hoàn toàn thông qua hệ thống **Slash Commands (/)** hiện đại.
+**DinoBot** là giải pháp Discord Bot toàn diện dạng **Monorepo** bao gồm Discord Bot thông minh và Website Landing Page tra cứu trực quan. Bot được xây dựng bằng **Node.js** và **Discord.js v14**, tích hợp trọn bộ **34 Slash Commands (/)** hiện đại với giao diện nút bấm tương tác thời gian thực.
 
-[Tính Năng](#-tính-năng-chính) • [Cài Đặt](#-cài-đặt-cục-bộ) • [Deploy Commands](#-đăng-ký-slash-commands) • [Triển Khai 24/7](#-triển-khai-lên-cloud-247) • [Cấu Trúc](#-cấu-trúc-thư-mục)
+[🌐 Trải Nghiệm Website Demo](https://dinobotvn.vercel.app/) • [Tính Năng](#-tính-năng-chính-34-lệnh) • [Cấu Trúc Monorepo](#-cấu-trúc-monorepo) • [Cài Đặt Cục Bộ](#-hướng-dẫn-cài-đặt-cục-bộ) • [Triển Khai 24/7](#-triển-khai-lên-cloud-247)
 
 </div>
 
 ---
 
-## 🚀 Tính Năng Chính
+## 🚀 Tính Năng Chính (34 Lệnh)
 
-### 🛡️ Quản trị Server (Moderation)
-* `/ban`: Cấm thành viên vi phạm khỏi server.
-* `/unban`: Gỡ cấm (Unban) người dùng bằng User ID.
-* `/kick`: Trục xuất thành viên khỏi server.
-* `/mute`: Tạm khóa chat (Timeout) thành viên trong thời gian nhất định.
+Hệ thống được thiết kế dạng module với **34 Slash Commands (/)** chia thành 5 chuyên mục chính:
+
+### 🎵 Âm Nhạc Đa Nền Tảng (Music - 7 lệnh)
+* `/play`: Phát nhạc từ YouTube, Spotify, SoundCloud, Zing MP3, Apple Music hoặc tìm kiếm theo từ khóa.
+* `/pause`: Tạm dừng bài hát đang phát trong kênh thoại.
+* `/resume`: Tiếp tục phát bài hát đang tạm dừng.
+* `/skip`: Bỏ qua bài hát hiện tại và phát bài tiếp theo trong hàng đợi.
+* `/stop`: Dừng phát nhạc, xóa toàn bộ hàng đợi và rời phòng thoại.
+* `/queue`: Hiển thị danh sách các bài hát đang chờ phát trong hàng đợi.
+* `/list`: Xem danh sách phát chi tiết kèm tổng thời lượng bài hát.
+
+### 🛡️ Quản Trị Máy Chủ (Moderation - 14 lệnh)
+* `/ban`: Cấm thành viên vi phạm khỏi máy chủ kèm lý do.
+* `/unban`: Gỡ cấm (Unban) thành viên bằng User ID.
+* `/kick`: Trục xuất thành viên ra khỏi máy chủ.
+* `/mute`: Tạm khóa chat (Timeout) thành viên trong khoảng thời gian chỉ định (1m, 1h, 1d,...).
 * `/unmute`: Gỡ phạt timeout cho thành viên.
-* `/warn`: Cảnh cáo thành viên vi phạm.
-* `/clear`: Xóa tin nhắn hàng loạt theo số lượng yêu cầu.
-* `/lock`: Khóa kênh chat (chặn gửi tin nhắn) khi có sự cố.
-* `/unlock`: Mở khóa lại kênh chat cho thành viên.
-* `/slowmode`: Cài đặt thời gian làm chậm (giãn cách gửi tin nhắn) cho kênh.
-* `/addrole`: Thêm hoặc gỡ Role cho thành viên.
-* `/setwelcome`: Cài đặt kênh gửi thông báo chào đón thành viên mới.
+* `/warn`: Cảnh cáo thành viên vi phạm nội quy kèm ghi chú lý do.
+* `/clear`: Xóa nhanh số lượng tin nhắn chỉ định trong kênh chat (1 - 100 tin nhắn).
+* `/lock`: Khóa kênh chat, ngăn không cho thành viên gửi tin nhắn.
+* `/unlock`: Mở khóa lại kênh chat cho thành viên trò chuyện.
+* `/slowmode`: Cài đặt thời gian giãn cách gửi tin nhắn cho kênh chat.
+* `/addrole`: Gán vai trò mới cho thành viên trong máy chủ.
+* `/nickname`: Đổi biệt danh hoặc đặt lại biệt danh gốc cho thành viên.
+* `/setwelcome`: Cài đặt kênh tự động gửi tin nhắn chào mừng thành viên mới gia nhập.
 * `/settempvoice`: Cài đặt kênh kích hoạt tạo phòng Voice tự động (Join-to-Create).
-* `/nickname`: Đổi biệt danh của thành viên trong server.
 
-### 🎲 Giải trí & Trò chơi (Fun)
-* `/blackjack`: Chơi Xì Dách (21 điểm) đối đầu trực tiếp với DinoBot với giao diện nút bấm tương tác.
-* `/baobuakeo`: Chơi Kéo - Búa - Bao với bot hoặc bạn bè.
-* `/giveaway`: Tạo sự kiện phát quà/giveaway ngẫu nhiên cho thành viên.
-* `/roll`: Lắc xúc xắc may mắn hoặc quay số ngẫu nhiên.
-* `/random`: Chọn ngẫu nhiên một con số hoặc lựa chọn trong danh sách.
+### 🎲 Mini Games & Giải Trí (Fun - 5 lệnh)
+* `/blackjack`: Chơi Xì Dách (Blackjack 21 điểm) đối đầu bot với nút bấm Hit, Stand, Double Down trực quan.
+* `/baobuakeo`: Chơi Oẳn Tù Tì (Kéo - Búa - Bao) bằng nút bấm thời gian thực.
+* `/giveaway`: Tạo sự kiện tặng quà cộng đồng có đồng hồ đếm ngược và chọn người trúng giải ngẫu nhiên.
+* `/roll`: Tung xúc xắc ngẫu nhiên với tùy chọn số lượng xúc xắc và số mặt.
+* `/random`: Quay số may mắn hoặc chọn ngẫu nhiên trong khoảng chỉ định.
 
-### 🛠️ Tiện ích & Thông tin (Utility)
-* `/userinfo`: Xem thông tin chi tiết về người dùng (ngày tạo tài khoản, ngày join server, roles,...).
-* `/poll`: Tạo cuộc bình chọn với các nút bấm tương tác trực tiếp.
-* `/remindme`: Đặt lịch hẹn giờ để bot gửi thông báo nhắc nhở công việc.
-* `/serverinfo`: Hiển thị thông tin chi tiết về server (thành viên, kênh, roles, ngày tạo,...).
-* `/avatar`: Xem và tải ảnh đại diện chất lượng cao của thành viên hoặc server.
-* `/help`: Hiển thị danh sách toàn bộ các lệnh và hướng dẫn sử dụng.
-* `/ping`: Kiểm tra độ trễ (latency) của bot và Discord WebSocket API.
-* `/say`: Gửi tin nhắn ẩn danh qua bot.
+### 🛠️ Tiện Ích & Thăm Dò (Utility - 6 lệnh)
+* `/help`: Hiển thị danh sách toàn bộ 34 lệnh phân theo 5 chuyên mục kèm hướng dẫn chi tiết.
+* `/poll`: Tạo cuộc thăm dò ý kiến với các nút bấm bình chọn trực tiếp.
+* `/remindme`: Đặt lịch hẹn giờ để bot nhắc nhở công việc quan trọng.
+* `/serverinfo`: Xem thông tin chi tiết, số lượng thành viên, kênh và thống kê máy chủ.
+* `/userinfo`: Xem hồ sơ người dùng, ngày tạo tài khoản, ngày tham gia và danh sách vai trò.
+* `/avatar`: Lấy ảnh đại diện kích thước gốc độ phân giải cao của thành viên hoặc server.
+
+### 💬 Lệnh Cơ Bản (Slash - 2 lệnh)
+* `/ping`: Đo độ trễ (latency) WebSocket API của bot.
+* `/say`: Gửi thông điệp dưới danh nghĩa DinoBot trong kênh chat.
 
 ---
 
-## 📁 Cấu Trúc Thư Mục
+## 🌐 DinoBot Web Landing Page
+
+Thư mục `web/` là trang giới thiệu và tra cứu tương tác của DinoBot, được deploy tại [dinobotvn.vercel.app](https://dinobotvn.vercel.app/):
+* **Live Command Explorer:** Tìm kiếm, lọc và xem cú pháp 34 lệnh trực quan theo từng danh mục và quyền hạn.
+* **Discord Message Simulator:** Giả lập giao diện Discord phản hồi tương tác (Music Embeds, Game Buttons, Giveaway Card,...).
+* **Responsive & Dark Modern UI:** Thiết kế đậm chất Gamer phong cách Discord, hiệu ứng mượt mà với Tailwind CSS v4 và Framer Motion.
+
+---
+
+## 📁 Cấu Trúc Monorepo
 
 ```text
 dino-bot-discord/
-├── src/
-│   ├── commands/
-│   │   ├── fun/             # Các lệnh trò chơi & giải trí (baobuakeo, giveaway, roll, random)
-│   │   ├── moderation/      # Các lệnh quản trị (ban, kick, mute, warn, clear, addRole, nickname)
-│   │   ├── slash/           # Các lệnh cơ bản (ping, say)
-│   │   └── utility/         # Các lệnh tiện ích (help, avatar, serverinfo)
-│   ├── events/              # Lắng nghe sự kiện Discord (ready, interactionCreate)
-│   ├── handlers/            # Xử lý tương tác (commandHandler, buttonHandler, selectMenuHandler)
-│   └── index.js             # File khởi chạy chính của Bot & Express Keep-alive Server
-├── clear-commands.js        # Script xóa toàn bộ Slash Commands trên Discord API
-├── deploy-commands.js       # Script đăng ký/cập nhật Slash Commands lên Discord API
-├── example.env              # Mẫu biến môi trường
-├── package.json
+├── bot/                     # Discord Bot Application (Discord.js v14)
+│   ├── src/
+│   │   ├── commands/        # Toàn bộ 34 Slash Commands
+│   │   │   ├── fun/         # Lệnh trò chơi (blackjack, baobuakeo, giveaway, roll, random)
+│   │   │   ├── moderation/  # Lệnh quản trị (ban, kick, mute, warn, clear, lock, addRole,...)
+│   │   │   ├── music/       # Lệnh âm nhạc (play, pause, resume, skip, stop, queue, list)
+│   │   │   ├── slash/       # Lệnh cơ bản (ping, say)
+│   │   │   └── utility/     # Lệnh tiện ích (help, avatar, serverinfo, userinfo, poll, remindme)
+│   │   ├── events/          # Discord Event listeners (ready, interactionCreate, voiceStateUpdate,...)
+│   │   ├── handlers/        # Xử lý command, buttons, select menus
+│   │   ├── utils/           # Music Manager, Config Manager
+│   │   └── index.js         # Entry point & Express Keep-alive Server
+│   ├── clear-commands.js    # Script dọn dẹp Slash Commands trên Discord API
+│   ├── deploy-commands.js   # Script đăng ký/cập nhật Slash Commands
+│   ├── .env.example         # Mẫu biến môi trường cho Bot
+│   └── package.json
+├── web/                     # DinoBot Web Landing Page (React 19 + Vite + Tailwind v4)
+│   ├── src/
+│   │   ├── components/      # UI components (Hero, Features, Commands, Simulator, Navbar, Footer)
+│   │   ├── data/            # botData.js (34 lệnh, stats, version v1.0.0, FAQs)
+│   │   ├── pages/           # HomePage, FeaturesPage, CommandsPage, FaqPage
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── public/              # Logo và static assets
+│   ├── vite.config.js
+│   └── package.json
+├── package.json             # Root Monorepo configuration (npm workspaces)
 └── README.md
 ```
 
@@ -78,7 +117,7 @@ dino-bot-discord/
 
 ### 1. Yêu cầu hệ thống
 * [Node.js](https://nodejs.org/) phiên bản **18.x** trở lên.
-* Trình quản lý gói `npm` hoặc `yarn`.
+* Trình quản lý gói `npm`.
 
 ### 2. Clone dự án và cài đặt Dependencies
 ```bash
@@ -88,12 +127,12 @@ git clone https://github.com/DuyPhatpeo/DinoBotDiscord.git
 # Di chuyển vào thư mục dự án
 cd DinoBotDiscord
 
-# Cài đặt các thư viện cần thiết
+# Cài đặt toàn bộ dependencies cho cả bot và web (Workspaces)
 npm install
 ```
 
 ### 3. Cấu hình Biến môi trường (.env)
-Tạo file `.env` tại thư mục gốc của dự án (sao chép từ `example.env`):
+Tạo file `.env` tại thư mục `bot/` (sao chép từ `bot/.env.example`):
 
 ```env
 DISCORD_TOKEN=your_bot_token_here
@@ -104,82 +143,65 @@ PORT=3000
 
 > **Cách lấy thông tin:**
 > * `DISCORD_TOKEN` & `CLIENT_ID`: Lấy tại [Discord Developer Portal](https://discord.com/developers/applications) > Chọn Bot của bạn.
-> * `GUILD_ID`: ID của server Discord bạn muốn test (Bật Developer Mode trên Discord > Chuột phải vào Icon Server > Copy Server ID).
+> * `GUILD_ID`: ID của server Discord thử nghiệm (Bật Developer Mode trên Discord > Chuột phải vào Icon Server > Copy Server ID).
 
 ---
 
-## ⚡ Đăng Ký Slash Commands
+## ⚡ Các Lệnh Quản Trị Monorepo
 
-Mỗi khi bạn thêm mới hoặc chỉnh sửa lệnh trong thư mục `src/commands/`, hãy chạy lệnh deploy để đồng bộ lên Discord:
+Từ thư mục gốc dự án, bạn có thể chạy nhanh các tác vụ thông qua npm scripts:
 
+### Quản lý Bot
 ```bash
-# Đăng ký Slash Commands cho Guild (áp dụng tức thì)
-npm run deploy
+# Đăng ký / cập nhật Slash Commands lên Discord API
+npm run bot:deploy
 
-# Xóa toàn bộ Slash Commands nếu cần dọn dẹp
-npm run clear
+# Xóa toàn bộ Slash Commands nếu cần làm mới
+npm run bot:clear
+
+# Chạy Bot ở chế độ phát triển (Tự reload bằng nodemon)
+npm run bot:dev
+
+# Chạy Bot ở chế độ Production
+npm run bot:start
 ```
 
----
-
-## ▶️ Khởi Chạy Bot
-
+### Quản lý Web
 ```bash
-# Chạy ở chế độ phát triển (Tự reload khi sửa code bằng nodemon)
-npm run dev
+# Chạy Web Landing Page ở chế độ local dev (Vite HMR)
+npm run web:dev
 
-# Chạy ở chế độ Production
-npm start
+# Build phiên bản Web cho Production
+npm run web:build
+
+# Preview bản build Web
+npm run web:preview
 ```
 
 ---
 
 ## 🌐 Triển Khai Lên Cloud 24/7
 
-DinoBot đã được tích hợp sẵn một **Express Web Server** nhẹ ở cổng `PORT` (mặc định 3000) phục vụ việc keep-alive trên các nền tảng hosting miễn phí.
+### 🔹 Triển khai Bot (Render + UptimeRobot)
+1. **Render Web Service:** Liên kết repo GitHub và chọn thư mục làm việc hoặc đặt build/start command:
+   * **Build Command:** `npm install --prefix bot`
+   * **Start Command:** `node bot/deploy-commands.js && node bot/src/index.js`
+2. **Environment Variables:** Điền `DISCORD_TOKEN`, `CLIENT_ID`, `GUILD_ID`, `PORT=3000`.
+3. **UptimeRobot:** Tạo monitor HTTP(s) ping đến URL Render (`https://<ten-bot>.onrender.com`) mỗi 5 phút để giữ server online liên tục.
 
-### 🔹 Bước 1: Deploy lên Render
-1. Truy cập [Render Dashboard](https://dashboard.render.com/).
-2. Chọn **New +** > **Web Service** và liên kết với repo GitHub của bạn.
-3. Cấu hình thông số:
-   * **Runtime:** `Node`
-   * **Build Command:** `npm install`
-   * **Start Command:** `node deploy-commands.js && node src/index.js`
-4. Trong mục **Environment Variables**, thêm đầy đủ các biến môi trường:
-   * `DISCORD_TOKEN`
-   * `CLIENT_ID`
-   * `GUILD_ID` (nếu deploy guild)
-   * `PORT` = `3000`
-5. Nhấn **Create Web Service**. Sau khi deploy xong, Render sẽ cấp cho bạn một URL dạng `https://<ten-bot>.onrender.com`.
-
-### 🔹 Bước 2: Giữ Bot Online 24/7 với UptimeRobot
-1. Truy cập [UptimeRobot](https://dashboard.uptimerobot.com/) và đăng ký tài khoản.
-2. Chọn **Add New Monitor**:
-   * **Monitor Type:** `HTTP(s)`
-   * **Friendly Name:** `DinoBot Keep Alive`
-   * **URL (or IP):** Điền URL Render của bot (`https://<ten-bot>.onrender.com`)
-   * **Monitoring Interval:** `5 minutes`
-3. Nhấn **Create Monitor**. UptimeRobot sẽ tự động gửi request mỗi 5 phút để server Render không bị sleep.
+### 🔹 Triển khai Web (Vercel)
+1. Import repository vào [Vercel](https://vercel.com/).
+2. Chọn **Root Directory** là `web`.
+3. Framework Preset: **Vite**, Build Command: `npm run build`, Output Directory: `dist`.
+4. Nhấn **Deploy** để nhận URL trực tuyến.
 
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng
 
-* **[Node.js](https://nodejs.org/)** - Nền tảng thực thi JavaScript phía máy chủ.
-* **[Discord.js v14](https://discord.js.org/)** - Thư viện chính thức tương tác với Discord API.
-* **[Express.js](https://expressjs.com/)** - Web server phục vụ health check & keep-alive ping.
-* **[Dotenv](https://www.npmjs.com/package/dotenv)** - Quản lý biến môi trường bảo mật.
-
----
-
-## 🤝 Đóng Góp (Contributing)
-
-Mọi đóng góp nhằm cải thiện tính năng cho **DinoBot** đều được hoan nghênh!
-1. Fork dự án
-2. Tạo branch tính năng mới (`git checkout -b feature/AmazingFeature`)
-3. Commit thay đổi của bạn (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push lên branch (`git push origin feature/AmazingFeature`)
-5. Mở một **Pull Request**
+* **Bot:** Node.js, [Discord.js v14](https://discord.js.org/), [@discordjs/voice](https://github.com/discordjs/discord.js/tree/main/packages/voice), Express.js (Keep-alive).
+* **Web:** React 19, Vite, [Tailwind CSS v4](https://tailwindcss.com/), Framer Motion, Lucide Icons, React Router v7.
+* **Kiến trúc:** Monorepo quản lý tập trung với npm workspaces.
 
 ---
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BOT_LINKS } from "../data/botData";
+import { BOT_LINKS, BOT_VERSION } from "../data/botData";
 const logo = "/logo.png";
-import { UserPlus, LifeBuoy, Zap, Github, Gamepad2, Code, Settings, Plus } from "lucide-react";
+import { UserPlus, LifeBuoy, Zap, Github, Gamepad2, Code, Settings, Plus, Sparkles } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -69,6 +69,12 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
         >
+          {/* Version Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Phiên bản v{BOT_VERSION} • 34 Lệnh Sẵn Sàng</span>
+          </div>
+
           {/* Giant Bold Headline */}
           <div className="space-y-1">
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white uppercase leading-[1.12] pb-1">

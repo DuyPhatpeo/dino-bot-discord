@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const logo = "/logo.png";
-import { BOT_LINKS } from "../data/botData";
+import { BOT_LINKS, BOT_VERSION } from "../data/botData";
 import { Github, MessageSquare } from "lucide-react";
 
 const Footer = () => {
@@ -29,6 +29,12 @@ const Footer = () => {
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
               Bot Discord hỗ trợ quản trị, trò chơi nút bấm và tiện ích máy chủ.
             </p>
+
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#171a21] border border-[#2b3040] text-[11px] text-emerald-400 font-medium">
+              <span>v{BOT_VERSION}</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-slate-400">34 Slash Commands</span>
+            </div>
           </div>
 
           {/* Navigation Pages */}

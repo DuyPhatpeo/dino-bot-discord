@@ -97,7 +97,7 @@ const FeaturesPage = () => {
               Xem toàn bộ cú pháp lệnh
             </h3>
             <p className="text-slate-400 text-sm">
-              Tìm kiếm và sao chép nhanh hơn 15+ lệnh của DinoBot.
+              Tìm kiếm và sao chép nhanh toàn bộ 34 lệnh của DinoBot.
             </p>
           </div>
 
