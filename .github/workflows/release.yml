@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,10 +19,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create GitHub Release
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate Changelog Notes
+        run: node .github/scripts/generate-changelog.js
+
+      - name: Create or Update GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
-            --title "Release ${GITHUB_REF_NAME}" \
-            --generate-notes
+          TAG_NAME="${GITHUB_REF_NAME}"
+          if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "main" ]; then
+            TAG_NAME=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          fi
+          echo "Target Release Tag: ${TAG_NAME}"
+          
+          if gh release view "${TAG_NAME}" >/dev/null 2>&1; then
+            echo "Updating existing release ${TAG_NAME}..."
+            gh release edit "${TAG_NAME}" --title "Release ${TAG_NAME}" --notes-file RELEASE_NOTES.md
+          else
+            echo "Creating new release ${TAG_NAME}..."
+            gh release create "${TAG_NAME}" --title "Release ${TAG_NAME}" --notes-file RELEASE_NOTES.md
+          fi
