@@ -6,4 +6,5 @@ dist/
 .env
 bot/.env
 /data/
+bot/data/
 RELEASE_NOTES.md

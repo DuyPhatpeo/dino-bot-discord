@@ -8,7 +8,7 @@
     "web"
   ],
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node bot/src/index.js",
     "bot:start": "npm --prefix bot start",
     "bot:dev": "npm --prefix bot run dev",
     "bot:deploy": "npm --prefix bot run deploy",
