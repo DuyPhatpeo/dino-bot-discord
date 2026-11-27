@@ -1,39 +1,20 @@
 {
-  "name": "dinobotdiscord",
+  "name": "dinobot-monorepo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Monorepo for DinoBot Discord and DinoBotWeb",
+  "workspaces": [
+    "bot",
+    "web"
+  ],
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon --watch src --exec \"node src/index.js\"",
-    "deploy": "node deploy-commands.js",
-    "clear": "node clear-commands.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DuyPhatpeo/DinoBotDiscord.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DuyPhatpeo/DinoBotDiscord/issues"
-  },
-  "homepage": "https://github.com/DuyPhatpeo/DinoBotDiscord#readme",
-  "dependencies": {
-    "@discordjs/builders": "^1.11.3",
-    "@discordjs/rest": "^2.5.1",
-    "@discordjs/voice": "^0.19.2",
-    "@distube/ytdl-core": "^5.2.1",
-    "discord-api-types": "^0.38.20",
-    "discord.js": "^14.21.0",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "ffmpeg-static": "^5.2.0",
-    "libsodium-wrappers": "^0.7.15",
-    "opusscript": "^0.0.8"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
+    "bot:start": "npm --prefix bot start",
+    "bot:dev": "npm --prefix bot run dev",
+    "bot:deploy": "npm --prefix bot run deploy",
+    "bot:clear": "npm --prefix bot run clear",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build",
+    "web:preview": "npm --prefix web run preview"
   }
 }

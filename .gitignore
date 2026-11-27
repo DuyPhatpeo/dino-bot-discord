@@ -1,5 +1,9 @@
 node_modules/
-.env
+bot/node_modules/
+web/node_modules/
+web/dist/
 dist/
-data/
+.env
+bot/.env
+/data/
 RELEASE_NOTES.md

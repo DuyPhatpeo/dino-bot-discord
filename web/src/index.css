@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  body {
+    background-color: #171a21;
+    color: #F3F4F6;
+    overflow-x: hidden;
+  }
+
+  /* Custom sleek scrollbar matching MEE6 dark slate & Emerald */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #171a21;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2b3042;
+    border-radius: 9999px;
+    border: 2px solid #171a21;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #10b981;
+  }
+}
+
+/* MEE6 Dark Slate Navy Card & Panel System */
+.mee6-card {
+  background-color: #202430;
+  border: 1px solid #2b3040;
+}
+
+.mee6-card-subtle {
+  background-color: rgba(32, 36, 48, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mee6-card-glow {
+  background-color: #202430;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.18);
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(32, 36, 48, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(32, 36, 48, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.15);
+}
+
+/* Ambient Radial Mesh Gradients */
+.mee6-ambient-bg {
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16, 185, 129, 0.13), transparent 70%),
+    radial-gradient(circle at 90% 25%, rgba(20, 184, 166, 0.07), transparent 45%),
+    radial-gradient(circle at 10% 60%, rgba(16, 185, 129, 0.06), transparent 50%),
+    #171a21;
+}
+
+/* Hero Banner Grid & Spotlight Effects */
+.hero-grid-pattern {
+  background-size: 44px 44px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, black 35%, transparent 75%);
+}
+
+/* Hero Banner Watermark: Scattered layout (Controller, Code, Toggle Settings) */
+.dino-watermark-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cg id='ctrl'%3E%3Crect x='-35' y='-20' width='70' height='40' rx='20' fill='none' stroke='%23ffffff' stroke-width='4'/%3E%3Ccircle cx='-15' cy='0' r='8' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Cpath d='M-15 -8 v16 M-23 0 h16' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='13' cy='-5' r='3' fill='%23ffffff'/%3E%3Ccircle cx='21' cy='3' r='3' fill='%23ffffff'/%3E%3Ccircle cx='13' cy='11' r='3' fill='%23ffffff'/%3E%3Ccircle cx='5' cy='3' r='3' fill='%23ffffff'/%3E%3C/g%3E%3Cg id='code'%3E%3Cpath d='M-15 -15 L-30 0 L-15 15 M15 -15 L30 0 L15 15 M5 -20 L-5 20' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cg id='gear'%3E%3Crect x='-16' y='-14' width='32' height='12' rx='6' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Ccircle cx='-6' cy='-8' r='3' fill='%23ffffff'/%3E%3Crect x='-16' y='2' width='32' height='12' rx='6' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Ccircle cx='6' cy='8' r='3' fill='%23ffffff'/%3E%3C/g%3E%3C/defs%3E%3Cg opacity='0.085'%3E%3Cg stroke='%23ffffff' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M50 180v10 M45 185h10 M200 150v10 M195 155h10 M350 200v10 M345 205h10 M150 350v10 M145 355h10 M300 40v10 M295 45h10 M80 280v10 M75 285h10'/%3E%3C/g%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='120' cy='50' r='2'/%3E%3Ccircle cx='280' cy='60' r='1.5'/%3E%3Ccircle cx='40' cy='220' r='2'/%3E%3Ccircle cx='180' cy='180' r='1.5'/%3E%3Ccircle cx='380' cy='280' r='2'/%3E%3Ccircle cx='220' cy='380' r='1.5'/%3E%3Ccircle cx='80' cy='380' r='2'/%3E%3Ccircle cx='250' cy='240' r='1.5'/%3E%3C/g%3E%3Cuse href='%23ctrl' transform='translate(90, 110) rotate(-15)'/%3E%3Cuse href='%23gear' transform='translate(310, 130) rotate(20)'/%3E%3Cuse href='%23code' transform='translate(260, 320) rotate(-10)'/%3E%3Cuse href='%23gear' transform='translate(100, 290) rotate(35)'/%3E%3Cuse href='%23ctrl' transform='translate(340, 340) rotate(45) scale(0.6)'/%3E%3Cuse href='%23gear' transform='translate(200, 60) rotate(-20) scale(0.7)'/%3E%3Cuse href='%23code' transform='translate(50, 40) rotate(25) scale(0.7)'/%3E%3Cuse href='%23ctrl' transform='translate(180, 230) rotate(-15) scale(0.7)'/%3E%3Cuse href='%23code' transform='translate(360, 40) rotate(-30) scale(0.6)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+@keyframes dino-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(15deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(12deg);
+  }
+}
+
+.animate-dino-float {
+  animation: dino-float 6s ease-in-out infinite;
+}
+
+
