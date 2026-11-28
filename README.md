@@ -209,19 +209,23 @@ npm run web:preview
 * **Ra mắt DinoBot Web:**
   * Website chính thức [dinobotvn.vercel.app](https://dinobotvn.vercel.app/) tra cứu tương tác 34 lệnh, Discord Message Simulator trực quan.
 
-### ⚡ v1.1.x — Cải Tiến Trò Chơi, Quản Trị & Giao Diện Tương Tác
-* **Trò chơi tương tác (Fun):**
-  * Bổ sung game Xì Dách (`/blackjack`) với các nút bấm Discord Hit, Stand, Double Down.
-  * Nâng cấp Oẳn Tù Tì (`/baobuakeo`) với nút bấm thời gian thực và biểu tượng emoji sinh động.
-  * Tối ưu lệnh `/roll` (xúc xắc nhiều mặt và số lượng tùy chọn), `/random`.
-  * Nâng cấp hệ thống Giveaway (`/giveaway`): thông báo người chiến thắng ra kênh chat độc lập thay vì sửa embed, chống spam vé.
-* **Quản trị & Tiện ích (Moderation & Utility):**
-  * Bổ sung tính năng tạo phòng thoại tự động (`/settempvoice` Join-to-Create Voice).
-  * Thêm lệnh cảnh cáo (`/warn`), khóa kênh (`/lock`, `/unlock`), giãn cách tin nhắn (`/slowmode`).
-  * Chuẩn hóa lệnh `/serverinfo` và `/userinfo` hiển thị chi tiết thông số server.
-* **Tối ưu mã nguồn & Giao diện:**
-  * Sửa lỗi duplicate interaction acknowledgements trong `buttonHandler.js` và `commandHandler.js`.
-  * Chuẩn hóa thiết kế bảng Discord Embeds và nút bấm nhất quán trên toàn bộ bot.
+### 🛡️ v1.1.1 — Bản Cập Nhật Quản Trị Nâng Cao & Temp Voice
+* **Quản trị & Kiểm soát kênh (Moderation Suite):**
+  * Bổ sung tính năng tạo phòng thoại tự động (`/settempvoice` Join-to-Create Voice): tự động tạo kênh riêng khi tham gia và tự thu hồi dọn dẹp khi kênh trống.
+  * Bổ sung công cụ xử lý sự cố kênh chat: Khóa kênh (`/lock`), mở khóa kênh (`/unlock`) và thời gian giãn cách gửi tin nhắn (`/slowmode`).
+  * Bổ sung lệnh tra cứu hồ sơ người dùng (`/userinfo`): ngày tạo tài khoản, ngày gia nhập máy chủ, danh sách vai trò sở hữu.
+* **Tối ưu giao diện & hệ thống:**
+  * Chuẩn hóa lệnh `/serverinfo`: hiển thị đầy đủ thông số kênh, thành viên, boost tier, chủ sở hữu.
+  * Tinh giản giao diện Discord Embeds, loại bỏ icon rườm rà giúp thông điệp hiển thị trang nhã, rõ ràng.
+
+### 🎮 v1.1.0 — Bản Cập Nhật Mini Games Nút Bấm Tương Tác
+* **Trò chơi nút bấm thời gian thực (Interactive Mini-Games):**
+  * Bổ sung game Xì Dách (`/blackjack` 21 điểm) đối đầu bot với nút bấm Hit, Stand, Double Down tương tác trực tiếp.
+  * Nâng cấp toàn diện Oẳn Tù Tì (`/baobuakeo`): tích hợp các nút bấm Búa, Kéo, Bao có emoji trực quan 1-click.
+  * Nâng cấp lệnh tung xúc xắc (`/roll`): hỗ trợ tùy chỉnh số lượng xúc xắc và số mặt (D6, D20,...).
+  * Nâng cấp hệ thống phát quà cộng đồng (`/giveaway`): công bố người trúng giải qua tin nhắn kênh riêng biệt, tích hợp nút nhận vé chống spam.
+* **Sửa lỗi & Ổn định:**
+  * Khắc phục triệt để lỗi crash do trùng lặp phản hồi tương tác (duplicate interaction acknowledgements) trong `buttonHandler.js`.
 
 ### 🛡️ v1.0.0 — Bản Phát Hành Nền Tảng (Foundation Release)
 * Khởi chạy Discord Bot sử dụng Discord.js v14 và Slash Commands (`/`).
