@@ -1,4 +1,4 @@
-export const BOT_VERSION = "1.0.0";
+export const BOT_VERSION = "1.2.0";
 
 export const BOT_LINKS = {
   invite: "https://discord.com/oauth2/authorize?client_id=1382559506885775360",

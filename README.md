@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-v1.0.0-10b981?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v1.2.0-10b981?style=for-the-badge)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14.21.0-5865F2?style=for-the-badge&logo=discord&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
@@ -12,7 +12,7 @@
 
 **DinoBot** là giải pháp Discord Bot toàn diện dạng **Monorepo** bao gồm Discord Bot thông minh và Website Landing Page tra cứu trực quan. Bot được xây dựng bằng **Node.js** và **Discord.js v14**, tích hợp trọn bộ **34 Slash Commands (/)** hiện đại với giao diện nút bấm tương tác thời gian thực.
 
-[🌐 Trải Nghiệm Website Demo](https://dinobotvn.vercel.app/) • [Tính Năng](#-tính-năng-chính-34-lệnh) • [Cấu Trúc Monorepo](#-cấu-trúc-monorepo) • [Cài Đặt Cục Bộ](#-hướng-dẫn-cài-đặt-cục-bộ) • [Triển Khai 24/7](#-triển-khai-lên-cloud-247)
+[🌐 Trải Nghiệm Website Demo](https://dinobotvn.vercel.app/) • [Tính Năng](#-tính-năng-chính-34-lệnh) • [Lịch Sử Phiên Bản](#-lịch-sử-phiên-bản-changelog) • [Cấu Trúc Monorepo](#-cấu-trúc-monorepo) • [Cài Đặt Cục Bộ](#-hướng-dẫn-cài-đặt-cục-bộ) • [Triển Khai 24/7](#-triển-khai-lên-cloud-247)
 
 </div>
 
@@ -194,6 +194,40 @@ npm run web:preview
 2. Chọn **Root Directory** là `web`.
 3. Framework Preset: **Vite**, Build Command: `npm run build`, Output Directory: `dist`.
 4. Nhấn **Deploy** để nhận URL trực tuyến.
+
+---
+
+## 📜 Lịch Sử Phiên Bản (Changelog)
+
+### 🎵 v1.2.0 — Bản Cập Nhật Âm Nhạc & Monorepo (Hiện tại)
+* **Hệ thống Phát Nhạc Đa Nền Tảng (Music Player):**
+  * Tích hợp `@discordjs/voice`, `@distube/ytdl-core`, `ffmpeg-static` phát nhạc trực tiếp trong kênh thoại voice.
+  * Hỗ trợ phát nhạc từ YouTube, Spotify, SoundCloud, Zing MP3, Apple Music qua tìm kiếm từ khóa hoặc đường link.
+  * Trọn bộ 7 lệnh điều khiển âm nhạc: `/play`, `/pause`, `/resume`, `/skip`, `/stop`, `/queue`, `/list`.
+* **Kiến trúc Monorepo:**
+  * Tách biệt rõ ràng thành hai package độc lập `bot/` và `web/` được quản lý tập trung qua npm workspaces.
+* **Ra mắt DinoBot Web:**
+  * Website chính thức [dinobotvn.vercel.app](https://dinobotvn.vercel.app/) tra cứu tương tác 34 lệnh, Discord Message Simulator trực quan.
+
+### ⚡ v1.1.x — Cải Tiến Trò Chơi, Quản Trị & Giao Diện Tương Tác
+* **Trò chơi tương tác (Fun):**
+  * Bổ sung game Xì Dách (`/blackjack`) với các nút bấm Discord Hit, Stand, Double Down.
+  * Nâng cấp Oẳn Tù Tì (`/baobuakeo`) với nút bấm thời gian thực và biểu tượng emoji sinh động.
+  * Tối ưu lệnh `/roll` (xúc xắc nhiều mặt và số lượng tùy chọn), `/random`.
+  * Nâng cấp hệ thống Giveaway (`/giveaway`): thông báo người chiến thắng ra kênh chat độc lập thay vì sửa embed, chống spam vé.
+* **Quản trị & Tiện ích (Moderation & Utility):**
+  * Bổ sung tính năng tạo phòng thoại tự động (`/settempvoice` Join-to-Create Voice).
+  * Thêm lệnh cảnh cáo (`/warn`), khóa kênh (`/lock`, `/unlock`), giãn cách tin nhắn (`/slowmode`).
+  * Chuẩn hóa lệnh `/serverinfo` và `/userinfo` hiển thị chi tiết thông số server.
+* **Tối ưu mã nguồn & Giao diện:**
+  * Sửa lỗi duplicate interaction acknowledgements trong `buttonHandler.js` và `commandHandler.js`.
+  * Chuẩn hóa thiết kế bảng Discord Embeds và nút bấm nhất quán trên toàn bộ bot.
+
+### 🛡️ v1.0.0 — Bản Phát Hành Nền Tảng (Foundation Release)
+* Khởi chạy Discord Bot sử dụng Discord.js v14 và Slash Commands (`/`).
+* Bộ 14 lệnh quản trị cơ bản: `/ban`, `/unban`, `/kick`, `/mute`, `/unmute`, `/clear`, `/addrole`, `/nickname`, `/setwelcome`,...
+* Bộ lệnh mini games và tiện ích ban đầu: `/baobuakeo`, `/giveaway`, `/roll`, `/random`, `/help`, `/ping`, `/say`, `/avatar`, `/poll`, `/remindme`.
+* Tích hợp Express keep-alive web server phục vụ việc hosting 24/7 trên Render.
 
 ---
 

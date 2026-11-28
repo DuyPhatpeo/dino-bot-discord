@@ -72,7 +72,7 @@ const Hero = () => {
           {/* Version Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Phiên bản v{BOT_VERSION} • 34 Lệnh Sẵn Sàng</span>
+            <span>Phiên bản v{BOT_VERSION} • Bản Cập Nhật Âm Nhạc & 34 Lệnh</span>
           </div>
 
           {/* Giant Bold Headline */}
