@@ -270,7 +270,7 @@ const Features = () => {
               </div>
 
               {/* Dice & Coin Mini Blocks */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-3.5 rounded-2xl bg-[#171a21] border border-[#2b3040] flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-400">
                     <Dice5 className="w-5 h-5" />
@@ -453,8 +453,8 @@ const Features = () => {
                   Tổ chức bởi: <span className="text-emerald-400 font-semibold">DuyPhat</span> • 1 Người Thắng
                 </div>
 
-                <button className="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs shadow-md hover:scale-[1.02] transition flex items-center justify-center gap-2">
-                  <span>🎉 Tham Gia Ngay (52 người đã tham gia)</span>
+                <button className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs shadow-md hover:scale-[1.02] transition flex items-center justify-center gap-1.5 text-center cursor-pointer">
+                  <span>🎉 Tham Gia Ngay (52 vé)</span>
                 </button>
               </div>
             </div>

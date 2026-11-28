@@ -55,7 +55,7 @@ const Navbar = () => {
         </Link>
 
         {/* Right: Desktop Navigation Links (All aligned to right, text-only, no buttons - Jockie Music Style) */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-9">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.path}
@@ -89,18 +89,19 @@ const Navbar = () => {
           </a>
         </nav>
 
-        {/* Mobile Menu Toggle Button */}
-        <div className="flex md:hidden items-center">
+        {/* Mobile/Tablet Menu Toggle Button */}
+        <div className="flex lg:hidden items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl bg-[#202430] border border-[#2e3448] text-slate-200 hover:text-white"
+            aria-label="Toggle Navigation Menu"
+            className="p-2.5 rounded-xl bg-[#202430] border border-[#2e3448] text-slate-200 hover:text-white transition cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile/Tablet Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -108,7 +109,7 @@ const Navbar = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-b border-[#2b3042] bg-[#171a21]/95 backdrop-blur-xl px-6 py-5 space-y-2"
+            className="lg:hidden border-b border-[#2b3042] bg-[#171a21]/95 backdrop-blur-xl px-6 py-5 space-y-2 shadow-2xl"
           >
             {NAV_LINKS.map((link) => (
               <NavLink

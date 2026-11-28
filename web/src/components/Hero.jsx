@@ -26,9 +26,9 @@ const Hero = () => {
           className="lg:col-span-5 flex items-center justify-center relative"
         >
           {/* Dynamic Speed Lines & Particle Accents */}
-          <div className="relative w-72 h-72 sm:w-88 sm:h-88 lg:w-96 lg:h-96 flex items-center justify-center">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex items-center justify-center">
             {/* Speed Lines & Flying Icons */}
-            <div className="absolute -left-16 sm:-left-28 top-1/2 -translate-y-1/2 -mt-6 sm:-mt-10 w-72 sm:w-[350px] h-72 sm:h-[350px] pointer-events-none select-none rotate-[15deg] z-0">
+            <div className="absolute -left-12 sm:-left-24 top-1/2 -translate-y-1/2 -mt-6 sm:-mt-10 w-64 sm:w-[350px] h-64 sm:h-[350px] pointer-events-none select-none rotate-[15deg] z-0">
               {/* White Speed Lines */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 350 350" stroke="white" fill="none" strokeWidth="3" strokeLinecap="round">
                 <line x1="300" y1="60" x2="100" y2="60" strokeOpacity="0.7" strokeDasharray="30 15 50 15" />
@@ -54,7 +54,7 @@ const Hero = () => {
               <img
                 src={logo}
                 alt="DinoBot Mascot"
-                className="w-56 h-56 sm:w-72 sm:h-72 lg:w-84 lg:h-84 object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                className="w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
               />
             </div>
           </div>
@@ -75,7 +75,10 @@ const Hero = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 hover:border-emerald-500/45 text-emerald-400 text-xs font-bold uppercase tracking-wider transition hover:scale-105 cursor-pointer"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Phiên bản v{BOT_VERSION} • Bản Cập Nhật Âm Nhạc & 34 Lệnh</span>
+            <span>
+              Phiên bản v{BOT_VERSION}{" "}
+              <span className="hidden sm:inline">• Bản Cập Nhật Âm Nhạc</span> • 34 Lệnh
+            </span>
           </Link>
 
           {/* Giant Bold Headline */}
@@ -94,13 +97,13 @@ const Hero = () => {
           </p>
 
           {/* Row of Multi-Colored Pill Buttons (Jockie Music Style) */}
-          <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-3.5">
+          <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3.5">
             {/* Pill 1: MỜI BOT (Emerald) */}
             <a
               href={BOT_LINKS.invite}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 transition-all cursor-pointer"
             >
               <UserPlus className="w-4 h-4 text-slate-950" />
               <span>MỜI BOT</span>
@@ -111,7 +114,7 @@ const Hero = () => {
               href={BOT_LINKS.support}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-105 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-105 transition-all cursor-pointer"
             >
               <LifeBuoy className="w-4 h-4 text-slate-950" />
               <span>HỖ TRỢ</span>
@@ -120,7 +123,7 @@ const Hero = () => {
             {/* Pill 3: TÍNH NĂNG (Cyan/Indigo) */}
             <Link
               to="/features"
-              className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all cursor-pointer"
             >
               <Zap className="w-4 h-4 text-slate-950" />
               <span>TÍNH NĂNG</span>
@@ -131,7 +134,7 @@ const Hero = () => {
               href={BOT_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#202430] hover:bg-[#282d3d] border border-[#2e3448] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:scale-105 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#202430] hover:bg-[#282d3d] border border-[#2e3448] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:scale-105 transition-all cursor-pointer"
             >
               <Github className="w-4 h-4 text-emerald-400" />
               <span>GITHUB</span>

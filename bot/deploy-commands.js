@@ -33,18 +33,24 @@ const rest = new REST({ version: "10" }).setToken(token);
 
 (async () => {
   try {
-    console.log(`🔁 Deploying ${commands.length} commands...`);
+    if (!token || !clientId) {
+      console.error("❌ Thiếu DISCORD_TOKEN hoặc CLIENT_ID trong cấu hình biến môi trường!");
+      process.exit(1);
+    }
 
+    console.log(`🔁 Đang đăng ký ${commands.length} lệnh lên Discord API...`);
+
+    // 1. Cập nhật ngay cho test guild nếu có GUILD_ID
     if (guildId) {
       await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
         body: commands,
       });
-      console.log("✅ Guild commands deployed (ngay lập tức).");
+      console.log(`✅ Đã cập nhật ${commands.length} lệnh cho Guild (${guildId}) tức thì.`);
     }
 
-    // Nếu muốn deploy global thì bật thêm
-    // await rest.put(Routes.applicationCommands(clientId), { body: commands });
-    // console.log("✅ Global commands deployed (1-3h).");
+    // 2. Cập nhật Global cho toàn bộ server bot tham gia
+    await rest.put(Routes.applicationCommands(clientId), { body: commands });
+    console.log(`✅ Đã đăng ký toàn bộ ${commands.length} lệnh Global thành công.`);
   } catch (err) {
     console.error("❌ Lỗi deploy:", err);
   }

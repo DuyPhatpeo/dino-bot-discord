@@ -25,6 +25,7 @@
     "@discordjs/rest": "^2.5.1",
     "@discordjs/voice": "^0.19.2",
     "@distube/ytdl-core": "^5.2.1",
+    "dinobot-monorepo": "file:..",
     "discord-api-types": "^0.38.20",
     "discord.js": "^14.21.0",
     "dotenv": "^17.2.1",

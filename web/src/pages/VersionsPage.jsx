@@ -4,58 +4,53 @@ import { VERSION_HISTORY } from "../data/botData";
 const VersionsPage = () => {
   return (
     <div className="pt-28 pb-20 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 block">
-            Changelog
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-black text-white tracking-tight mb-2">
             Lịch Sử Phiên Bản
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base">
-            Tổng hợp các đợt phát hành và cập nhật tính năng theo thời gian
+          <p className="text-slate-400 text-sm">
+            Chi tiết các bản cập nhật và tính năng của DinoBot
           </p>
         </div>
 
-        {/* Timeline List (Từ mới nhất xuống cũ nhất) */}
-        <div className="space-y-6">
+        {/* Timeline List (Từ mới nhất ở trên, bản cũ nhất sát dưới cùng) */}
+        <div className="space-y-5">
           {VERSION_HISTORY.map((item) => (
             <div
               key={item.version}
-              className={`p-6 sm:p-7 rounded-2xl border transition-all ${
+              className={`p-6 rounded-2xl border ${
                 item.current
-                  ? "bg-[#1c2230] border-emerald-500/40 shadow-lg shadow-emerald-500/5"
+                  ? "bg-[#1c2230] border-emerald-500/40"
                   : "bg-[#181c26] border-[#2b3040]"
               }`}
             >
-              {/* Header row: Version, Tag, Date, Total Commands */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-[#2b3040]">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl font-black text-white tracking-tight">
+              {/* Header: Version cùng hàng với ngày phát hành */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-[#2b3040]">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xl font-black text-white">
                     v{item.version}
                   </span>
+                  <span className="text-xs text-slate-400">
+                    ({item.date})
+                  </span>
                   {item.badge && (
-                    <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 uppercase tracking-wider">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 uppercase">
                       {item.badge}
                     </span>
                   )}
-                  <span className="text-sm font-semibold text-slate-300">
-                    {item.name}
-                  </span>
                 </div>
 
-                <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-                  <span>Tháng {item.date}</span>
-                  <span className="w-1 h-1 rounded-full bg-slate-600"></span>
-                  <span className="text-emerald-400 font-bold">{item.totalCommands} lệnh</span>
-                </div>
+                <span className="text-xs sm:text-sm font-semibold text-slate-300">
+                  {item.name}
+                </span>
               </div>
 
               {/* Bullet list of features */}
-              <ul className="space-y-2 text-sm text-slate-300">
+              <ul className="space-y-1.5 text-sm text-slate-300">
                 {item.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
+                  <li key={idx} className="flex items-start gap-2">
                     <span className="text-emerald-400 font-bold leading-5">•</span>
                     <span className="leading-5">{feat}</span>
                   </li>

@@ -15,14 +15,14 @@ const CtaSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-[#202430] to-[#1a1d26] p-8 sm:p-14 text-center backdrop-blur-2xl shadow-2xl shadow-emerald-950/20 overflow-hidden"
+          className="relative rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-[#202430] to-[#1a1d26] p-6 sm:p-14 text-center backdrop-blur-2xl shadow-2xl shadow-emerald-950/20 overflow-hidden"
         >
           {/* Logo */}
           <div className="mb-6">
             <img
               src={logo}
               alt="DinoBot Logo"
-              className="w-20 h-20 sm:w-24 sm:h-24 mx-auto object-contain"
+              className="w-16 h-16 sm:w-24 sm:h-24 mx-auto object-contain"
             />
           </div>
 
@@ -31,7 +31,7 @@ const CtaSection = () => {
             <span>Miễn Phí 100% Cho Mọi Máy Chủ</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4 max-w-2xl mx-auto leading-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4 max-w-2xl mx-auto leading-tight">
             Sẵn Sàng Nâng Cấp Máy Chủ Cùng{" "}
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-300 bg-clip-text text-transparent">
               DinoBot
@@ -39,17 +39,17 @@ const CtaSection = () => {
             ?
           </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg max-w-lg mx-auto mb-8 leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-lg max-w-lg mx-auto mb-8 leading-relaxed">
             Thêm bot vào máy chủ của bạn chỉ trong 30 giây. Không cần cấu hình phức tạp, bắt đầu quản trị và giải trí ngay lập tức!
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-8 w-full">
             <a
               href={BOT_LINKS.invite}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 transition-all cursor-pointer"
             >
               <UserPlus className="w-5 h-5 text-slate-950" />
               <span>Thêm DinoBot Ngay</span>
@@ -59,7 +59,7 @@ const CtaSection = () => {
               href={BOT_LINKS.support}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#171a21] border border-[#2b3040] text-white hover:border-emerald-500/40 font-bold text-sm sm:text-base hover:scale-105 transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-2xl bg-[#171a21] border border-[#2b3040] text-white hover:border-emerald-500/40 font-bold text-sm sm:text-base hover:scale-105 transition-all cursor-pointer"
             >
               <LifeBuoy className="w-4 h-4 text-emerald-400" />
               <span>Máy Chủ Hỗ Trợ</span>

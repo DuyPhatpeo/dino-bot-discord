@@ -21,8 +21,8 @@ const Stats = () => {
             </p>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {/* Stats Grid: 2 cols on mobile, 4 cols on tablet and desktop */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
             {BOT_STATS.map((stat, idx) => {
               const IconComponent = iconMap[stat.iconName] || Terminal;
               return (
