@@ -199,8 +199,8 @@ npm run web:preview
 
 ## 📜 Lịch Sử Phiên Bản (Changelog)
 
-### 🎵 v1.2.0 — Bản Cập Nhật Âm Nhạc & Monorepo (Hiện tại)
-* **Hệ thống Phát Nhạc Đa Nền Tảng (Music Player):**
+### 🎵 v1.2.0 — Bản Cập Nhật Âm Nhạc & Monorepo (Hiện tại - 34 Lệnh)
+* **Hệ thống Phát Nhạc Đa Nền Tảng (Music Player - 7 lệnh mới):**
   * Tích hợp `@discordjs/voice`, `@distube/ytdl-core`, `ffmpeg-static` phát nhạc trực tiếp trong kênh thoại voice.
   * Hỗ trợ phát nhạc từ YouTube, Spotify, SoundCloud, Zing MP3, Apple Music qua tìm kiếm từ khóa hoặc đường link.
   * Trọn bộ 7 lệnh điều khiển âm nhạc: `/play`, `/pause`, `/resume`, `/skip`, `/stop`, `/queue`, `/list`.
@@ -209,28 +209,35 @@ npm run web:preview
 * **Ra mắt DinoBot Web:**
   * Website chính thức [dinobotvn.vercel.app](https://dinobotvn.vercel.app/) tra cứu tương tác 34 lệnh, Discord Message Simulator trực quan.
 
-### 🛡️ v1.1.1 — Bản Cập Nhật Quản Trị Nâng Cao & Temp Voice
-* **Quản trị & Kiểm soát kênh (Moderation Suite):**
-  * Bổ sung tính năng tạo phòng thoại tự động (`/settempvoice` Join-to-Create Voice): tự động tạo kênh riêng khi tham gia và tự thu hồi dọn dẹp khi kênh trống.
-  * Bổ sung công cụ xử lý sự cố kênh chat: Khóa kênh (`/lock`), mở khóa kênh (`/unlock`) và thời gian giãn cách gửi tin nhắn (`/slowmode`).
-  * Bổ sung lệnh tra cứu hồ sơ người dùng (`/userinfo`): ngày tạo tài khoản, ngày gia nhập máy chủ, danh sách vai trò sở hữu.
+### 🛡️ v1.1.1 — Bản Cập Nhật Quản Trị Nâng Cao & Temp Voice (27 Lệnh)
+* **Quản trị & Kiểm soát kênh (Bổ sung 6 lệnh mới):**
+  * `/settempvoice`: Tự động tạo phòng thoại Voice tạm thời khi có người vào và tự dọn dẹp xóa kênh khi trống (Join-to-Create).
+  * `/setwelcome`: Cài đặt kênh tự động gửi tin nhắn chào mừng thành viên mới gia nhập.
+  * `/unban`: Gỡ cấm thành viên khỏi máy chủ bằng User ID.
+  * `/lock` & `/unlock`: Khóa kênh và mở khóa kênh chat nhanh chóng khi có sự cố.
+  * `/slowmode`: Cài đặt thời gian giãn cách gửi tin nhắn cho kênh.
 * **Tối ưu giao diện & hệ thống:**
-  * Chuẩn hóa lệnh `/serverinfo`: hiển thị đầy đủ thông số kênh, thành viên, boost tier, chủ sở hữu.
-  * Tinh giản giao diện Discord Embeds, loại bỏ icon rườm rà giúp thông điệp hiển thị trang nhã, rõ ràng.
+  * Chuẩn hóa thông số `/serverinfo` chi tiết: số lượng người thật và bot, danh mục kênh, boost tier.
+  * Tinh giản giao diện Discord Embeds, loại bỏ icon rườm rà.
 
-### 🎮 v1.1.0 — Bản Cập Nhật Mini Games Nút Bấm Tương Tác
-* **Trò chơi nút bấm thời gian thực (Interactive Mini-Games):**
-  * Bổ sung game Xì Dách (`/blackjack` 21 điểm) đối đầu bot với nút bấm Hit, Stand, Double Down tương tác trực tiếp.
-  * Nâng cấp toàn diện Oẳn Tù Tì (`/baobuakeo`): tích hợp các nút bấm Búa, Kéo, Bao có emoji trực quan 1-click.
-  * Nâng cấp lệnh tung xúc xắc (`/roll`): hỗ trợ tùy chỉnh số lượng xúc xắc và số mặt (D6, D20,...).
-  * Nâng cấp hệ thống phát quà cộng đồng (`/giveaway`): công bố người trúng giải qua tin nhắn kênh riêng biệt, tích hợp nút nhận vé chống spam.
-* **Sửa lỗi & Ổn định:**
+### 🎮 v1.1.0 — Bản Cập Nhật Mini Games & Nút Bấm Tương Tác (21 Lệnh)
+* **Trò chơi nút bấm thời gian thực & Tiện ích (Bổ sung 4 lệnh mới):**
+  * `/blackjack`: Game Xì Dách (21 điểm) đối đầu bot với nút bấm Hit, Stand, Double Down tương tác trực tiếp.
+  * `/poll`: Tạo cuộc thăm dò bình chọn ý kiến với các nút bấm trực tiếp.
+  * `/remindme`: Đặt lịch hẹn giờ để bot nhắc nhở công việc quan trọng.
+  * `/userinfo`: Xem hồ sơ chi tiết, ngày tham gia Discord và danh sách vai trò của thành viên.
+* **Nâng cấp tương tác & Sửa lỗi:**
+  * Nâng cấp `/baobuakeo`: Tích hợp các nút bấm Búa, Kéo, Bao có emoji trực quan 1-click.
+  * Nâng cấp `/roll`: Cho phép tùy chọn số lượng xúc xắc và số mặt.
+  * Nâng cấp `/giveaway`: Công bố người trúng giải bằng tin nhắn mới trong kênh, nút bấm nhận vé chống spam.
   * Khắc phục triệt để lỗi crash do trùng lặp phản hồi tương tác (duplicate interaction acknowledgements) trong `buttonHandler.js`.
 
-### 🛡️ v1.0.0 — Bản Phát Hành Nền Tảng (Foundation Release)
-* Khởi chạy Discord Bot sử dụng Discord.js v14 và Slash Commands (`/`).
-* Bộ 14 lệnh quản trị cơ bản: `/ban`, `/unban`, `/kick`, `/mute`, `/unmute`, `/clear`, `/addrole`, `/nickname`, `/setwelcome`,...
-* Bộ lệnh mini games và tiện ích ban đầu: `/baobuakeo`, `/giveaway`, `/roll`, `/random`, `/help`, `/ping`, `/say`, `/avatar`, `/poll`, `/remindme`.
+### 📦 v1.0.0 — Bản Phát Hành Nền Tảng (Foundation Release - 17 Lệnh)
+* Khởi chạy Discord Bot sử dụng Node.js và Discord.js v14 với hệ thống Slash Commands (`/`).
+* **8 lệnh Quản trị cơ bản:** `/ban`, `/kick`, `/mute`, `/unmute`, `/warn`, `/clear`, `/addrole`, `/nickname`.
+* **4 lệnh Trò chơi ban đầu:** `/baobuakeo`, `/giveaway`, `/random`, `/roll`.
+* **3 lệnh Tiện ích ban đầu:** `/avatar`, `/help`, `/serverinfo`.
+* **2 lệnh Cơ bản:** `/ping`, `/say`.
 * Tích hợp Express keep-alive web server phục vụ việc hosting 24/7 trên Render.
 
 ---
