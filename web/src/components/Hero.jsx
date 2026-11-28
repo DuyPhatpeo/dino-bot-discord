@@ -70,10 +70,13 @@ const Hero = () => {
           className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
         >
           {/* Version Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+          <Link
+            to="/versions"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 hover:border-emerald-500/45 text-emerald-400 text-xs font-bold uppercase tracking-wider transition hover:scale-105 cursor-pointer"
+          >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>Phiên bản v{BOT_VERSION} • Bản Cập Nhật Âm Nhạc & 34 Lệnh</span>
-          </div>
+          </Link>
 
           {/* Giant Bold Headline */}
           <div className="space-y-1">

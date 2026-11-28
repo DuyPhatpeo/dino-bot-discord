@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { name: "Tính Năng", path: "/features" },
   { name: "Lệnh Bot", path: "/commands" },
   { name: "FAQ", path: "/faq" },
+  { name: "Phiên Bản", path: "/versions" },
 ];
 
 const Navbar = () => {

@@ -30,11 +30,14 @@ const Footer = () => {
               Bot Discord hỗ trợ quản trị, trò chơi nút bấm và tiện ích máy chủ.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#171a21] border border-[#2b3040] text-[11px] text-emerald-400 font-medium">
+            <Link
+              to="/versions"
+              className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#171a21] border border-[#2b3040] hover:border-emerald-500/40 text-[11px] text-emerald-400 font-medium transition cursor-pointer"
+            >
               <span>v{BOT_VERSION}</span>
               <span className="text-slate-600">•</span>
               <span className="text-slate-400">34 Slash Commands</span>
-            </div>
+            </Link>
           </div>
 
           {/* Navigation Pages */}
@@ -65,6 +68,11 @@ const Footer = () => {
               <li>
                 <Link to="/faq" className="hover:text-emerald-400 transition">
                   Hỏi Đáp
+                </Link>
+              </li>
+              <li>
+                <Link to="/versions" className="hover:text-emerald-400 transition">
+                  Phiên Bản
                 </Link>
               </li>
             </ul>

@@ -1,5 +1,61 @@
 export const BOT_VERSION = "1.2.0";
 
+export const VERSION_HISTORY = [
+  {
+    version: "1.2.0",
+    name: "Bản Cập Nhật Âm Nhạc & DinoBot Web",
+    date: "11/2026",
+    totalCommands: 34,
+    badge: "Mới nhất",
+    current: true,
+    features: [
+      "Trình phát nhạc đa nền tảng (7 lệnh): /play, /pause, /resume, /skip, /stop, /queue, /list",
+      "Nguồn nhạc hỗ trợ: YouTube, Spotify, SoundCloud, Zing MP3, Apple Music",
+      "Tái cấu trúc kiến trúc Monorepo (bot và web)",
+      "Ra mắt DinoBot Web (dinobotvn.vercel.app) tra cứu lệnh và giả lập Discord",
+    ],
+  },
+  {
+    version: "1.1.1",
+    name: "Bản Cập Nhật Quản Trị Nâng Cao",
+    date: "09/2026",
+    totalCommands: 27,
+    features: [
+      "Tạo phòng thoại tự động: /settempvoice (Join-to-Create Voice)",
+      "Kênh chào mừng thành viên mới: /setwelcome",
+      "Bộ công cụ kiểm soát kênh chat: /lock, /unlock, /slowmode",
+      "Gỡ cấm thành viên theo ID: /unban",
+      "Bổ sung chi tiết thống kê vào /serverinfo và tối ưu giao diện Embeds",
+    ],
+  },
+  {
+    version: "1.1.0",
+    name: "Bản Cập Nhật Mini Games Nút Bấm",
+    date: "09/2026",
+    totalCommands: 21,
+    features: [
+      "Game Xì Dách 21 điểm: /blackjack nút bấm thời gian thực (Hit, Stand, Double Down)",
+      "Lệnh tiện ích mới: /poll (bình chọn), /remindme (nhắc việc), /userinfo (tra cứu hồ sơ)",
+      "Nâng cấp /baobuakeo sang 3 nút bấm Búa, Kéo, Bao",
+      "Nâng cấp /roll xúc xắc đa diện và /giveaway thông báo kênh riêng",
+      "Sửa lỗi crash duplicate interaction trong buttonHandler",
+    ],
+  },
+  {
+    version: "1.0.0",
+    name: "Bản Phát Hành Nền Tảng",
+    date: "03/2026",
+    totalCommands: 17,
+    features: [
+      "Khởi chạy Discord Bot sử dụng Discord.js v14 và Slash Commands (/)",
+      "8 lệnh quản trị cơ bản: /ban, /kick, /mute, /unmute, /warn, /clear, /addrole, /nickname",
+      "4 lệnh trò chơi ban đầu: /baobuakeo, /giveaway, /random, /roll",
+      "5 lệnh tiện ích và cơ bản: /avatar, /serverinfo, /help, /ping, /say",
+      "Tích hợp Express keep-alive web server chạy 24/7 trên Render",
+    ],
+  },
+];
+
 export const BOT_LINKS = {
   invite: "https://discord.com/oauth2/authorize?client_id=1382559506885775360",
   support: "https://discord.gg/p3d7859xFF",

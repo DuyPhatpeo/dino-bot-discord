@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import FeaturesPage from "./pages/FeaturesPage";
 import CommandsPage from "./pages/CommandsPage";
 import FaqPage from "./pages/FaqPage";
+import VersionsPage from "./pages/VersionsPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/features" element={<FeaturesPage />} />
             <Route path="/commands" element={<CommandsPage />} />
             <Route path="/faq" element={<FaqPage />} />
+            <Route path="/versions" element={<VersionsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
